@@ -1,7 +1,7 @@
 # Rozklad
 
 
-```puml
+```plantuml
 @startuml
 Alice -> Bob: Authentication Request
 Bob --> Alice: Authentication Response
