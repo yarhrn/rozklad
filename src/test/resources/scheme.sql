@@ -1,17 +1,19 @@
-create table scheduled_jobs
+create table scheduled_tasks
 (
-    id char(36) primary key,
-    scheduled_at timestamp with time zone,
-    trigger_at timestamp with time zone,
-    status smallint ,
-    updated_at timestamp with time zone,
-    payload jsonb
+    id char(36) primary key not null ,
+    scheduled_at timestamp with time zone not null ,
+    trigger_at timestamp with time zone not null ,
+    status smallint not null ,
+    updated_at timestamp with time zone not null ,
+    failed_reason smallint ,
+    payload jsonb not null
 );
 
-create table scheduled_jobs_change_log(
-    id char(36) primary key ,
-    job_id char(36),
-    status smallint ,
-    created_at timestamp with time zone,
-    payload jsonb
+create table scheduled_tasks_change_log(
+    id char(36) primary key not null ,
+    task_id char(36) not null ,
+    status smallint not null ,
+    created_at timestamp with time zone not null ,
+    failed_reason smallint ,
+    payload jsonb not null
 );

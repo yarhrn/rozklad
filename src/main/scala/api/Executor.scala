@@ -24,8 +24,8 @@ object Executor {
       stopSignal <- SignallingRef.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
       statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false))
-      executorService = new ExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef)
-      _ <- executorService.unsafeRoutine.compile.drain.start
+      executorService = new ExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10)
+      _ <- executorService.unsafeRoutine.compile.last
     } yield (executorService)
   }
 }
