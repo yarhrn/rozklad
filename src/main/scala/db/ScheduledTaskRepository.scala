@@ -21,11 +21,11 @@ object ScheduledTaskRepository {
             scheduled_tasks (id, scheduled_at, trigger_at, status, updated_at, payload)
         values
             (${descriptor.id}, ${descriptor.scheduledAt}, ${descriptor.triggerAt}, ${descriptor.status}, ${descriptor.updatedAt}, ${descriptor.payload})
-      """
-      .update
-      .run
+      """.update.run
 
-  def acquireBatch(now: Instant, limit: Int): Free[connection.ConnectionOp, List[ScheduledTask]] = {
+  def acquireBatch(
+      now: Instant,
+      limit: Int): Free[connection.ConnectionOp, List[ScheduledTask]] = {
     sql"""
         update scheduled_tasks
         set status = ${Status.Acquired}, updated_at = $now
@@ -38,54 +38,55 @@ object ScheduledTaskRepository {
             limit $limit
         )
         returning id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload
-       """
-      .query[ScheduledTask]
-      .to[List]
-      .map(_.sortBy(_.scheduledAt))
+       """.query[ScheduledTask].to[List].map(_.sortBy(_.scheduledAt))
   }
 
-  def done(id: Id[ScheduledTask], now: Instant) = {
+  def done(
+      id: Id[ScheduledTask],
+      now: Instant,
+      payload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
     transition(
       id = id,
       now = now,
       failedReason = None,
-      payload = None,
+      payload = payload,
       fromStatus = Status.Acquired,
       toStatus = Status.Succeeded
     )
   }
 
- def failed(id: Id[ScheduledTask], now: Instant, failedReason: Option[FailedReason], updatedPayload: Option[JsValue]) = {
-   transition(
-     id = id,
-     now = now,
-     failedReason = failedReason,
-     payload = updatedPayload,
-     fromStatus = Status.Acquired,
-     toStatus = Status.Failed
-   )
+  def failed(
+      id: Id[ScheduledTask],
+      now: Instant,
+      failedReason: Option[FailedReason],
+      updatedPayload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
+    transition(
+      id = id,
+      now = now,
+      failedReason = failedReason,
+      payload = updatedPayload,
+      fromStatus = Status.Acquired,
+      toStatus = Status.Failed
+    )
   }
 
-
-  def transition(id: Id[ScheduledTask],
-                 now: Instant,
-                 failedReason: Option[FailedReason],
-                 payload: Option[JsValue],
-                 fromStatus: Status,
-                 toStatus: Status
-                ) = {
+  def transition(
+      id: Id[ScheduledTask],
+      now: Instant,
+      failedReason: Option[FailedReason],
+      payload: Option[JsValue],
+      fromStatus: Status,
+      toStatus: Status): doobie.ConnectionIO[List[ScheduledTask]] = {
     (fr"""
         update scheduled_tasks
         set status = $toStatus, updated_at = $now""" ++
-      failedReason.map(failedReason => fr", failed_reason = $failedReason").getOrElse(Fragment.empty) ++
+      failedReason
+        .map(failedReason => fr", failed_reason = $failedReason")
+        .getOrElse(Fragment.empty) ++
       payload.map(payload => fr",payload = $payload ").getOrElse(Fragment.empty) ++ fr"""
         where id = $id and status = $fromStatus
         returning id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload
-       """)
-      .query[ScheduledTask]
-      .to[List]
+       """).query[ScheduledTask].to[List]
   }
 
-
 }
-

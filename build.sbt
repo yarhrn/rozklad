@@ -15,4 +15,4 @@ libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.1" % Test
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.39.12" % Test
 libraryDependencies += "org.postgresql" % "postgresql" % "42.4.1"
-libraryDependencies += "org.log4s" %% "log4s" % "1.8.2"
+libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
