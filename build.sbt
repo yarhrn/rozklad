@@ -1,6 +1,15 @@
 name := "rozklad"
 
 
+organization := "com.yarhrn"
+homepage := Some(url("https://github.com/yarhrn/rozklad"))
+scmInfo := Some(ScmInfo(url("https://github.com/yarhrn/rozklad"), "git@github.com:yarhrn/rozklad.git"))
+developers := List(Developer("Yaroslav Hryniuk",
+  "Yaroslav Hryniuk",
+  "yaroslavh.hryniuk@gmail.com",
+  url("https://github.com/yarhrn")))
+licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
+publishMavenStyle := true
 
 scalaVersion := "2.13.8"
 
