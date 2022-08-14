@@ -11,4 +11,3 @@ trait Shortcuts {
   }
 
 }
-

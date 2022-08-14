@@ -26,8 +26,7 @@ object ScheduledTaskOutcome {
 
   case class Succeeded(payload: Option[JsValue]) extends ScheduledTaskOutcome
 
-  case class Failed(reason: Option[FailedReason], payload: Option[JsValue])
-      extends ScheduledTaskOutcome
+  case class Failed(reason: Option[FailedReason], payload: Option[JsValue]) extends ScheduledTaskOutcome
 
   object Succeeded {
     val empty: ScheduledTaskOutcome = Succeeded(None)
@@ -53,15 +52,7 @@ object ExecutorService {
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
       statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false))
-      executorService = new Fs2ExecutorService[F](
-        service,
-        stopSignal,
-        routine,
-        streamEndDeferred,
-        statisticsRef,
-        10,
-        observer,
-        sleepTime)
+      executorService = new Fs2ExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime)
       _ <- executorService.unsafeRoutine.start
     } yield executorService
   }

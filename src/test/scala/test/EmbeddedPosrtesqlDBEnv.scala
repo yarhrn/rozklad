@@ -22,7 +22,8 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
 
   def refreshScheme() = {
     Thread.sleep(3000)
-    val connection = DriverManager.getConnection(postgres.jdbcUrl, postgres.username, postgres.password)
+    val connection =
+      DriverManager.getConnection(postgres.jdbcUrl, postgres.username, postgres.password)
     val statement = connection.createStatement()
     val source = io.Source.fromResource("./scheme.sql")
     statement.execute(source.getLines().mkString("\n"))
@@ -42,14 +43,10 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
       postgres.password
     )
 
-    dbs.foreach {
-      db =>
-        doobie.Fragment.const(s"delete from ${db}").update.run.transact(inner).r
-    }
+    dbs.foreach { db => doobie.Fragment.const(s"delete from ${db}").update.run.transact(inner).r }
 
     inner
   }
-
 
   var postgres: PostgreSQLContainer = new PostgreSQLContainer(Some(DockerImageName.parse("postgres:11")))
 

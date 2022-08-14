@@ -12,8 +12,7 @@ import rozklad.api.Event._
 
 import java.time.Instant
 
-class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])(
-    implicit ME: MonadCancel[F, Throwable])
+class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])(implicit ME: MonadCancel[F, Throwable])
     extends ScheduledTaskService[F] {
 
   override def schedule(task: ScheduledTask): F[ScheduledTask] = {
@@ -33,25 +32,16 @@ class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])
       if (tasks.isEmpty) observer.occurred(NoScheduledTasksWereAcquired)
       else observer.occurred(ScheduledTasksAcquired(tasks)))
 
-  override def done(
-      id: Id[ScheduledTask],
-      now: Instant,
-      payload: Option[JsValue]): F[ScheduledTask] = {
+  override def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): F[ScheduledTask] = {
     for {
       task <- ScheduledTaskRepository.done(id, now, payload).validateAndGet(id)
       _ <- ScheduledTaskLogRepository.insert(List(task))
     } yield task
   }.transact(xa).flatTap(task => observer.occurred(ScheduledTaskDone(task)))
 
-  override def failed(
-      id: Id[ScheduledTask],
-      now: Instant,
-      failedReason: Option[FailedReason],
-      updatedPayload: Option[JsValue]): F[ScheduledTask] = {
+  override def failed(id: Id[ScheduledTask], now: Instant, failedReason: Option[FailedReason], updatedPayload: Option[JsValue]): F[ScheduledTask] = {
     for {
-      task <- ScheduledTaskRepository
-        .failed(id, now, failedReason, updatedPayload)
-        .validateAndGet(id)
+      task <- ScheduledTaskRepository.failed(id, now, failedReason, updatedPayload).validateAndGet(id)
       _ <- ScheduledTaskLogRepository.insert(List(task))
     } yield task
   }.transact(xa).flatTap(task => observer.occurred(ScheduledTaskFailed(task)))

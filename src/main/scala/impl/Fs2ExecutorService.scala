@@ -1,16 +1,7 @@
 package rozklad
 package impl
 
-import api.{
-  Executor,
-  ExecutorService,
-  FailedReason,
-  Observer,
-  ScheduledTask,
-  ScheduledTaskOutcome,
-  ScheduledTaskService,
-  Statistics
-}
+import api.{Executor, ExecutorService, FailedReason, Observer, ScheduledTask, ScheduledTaskOutcome, ScheduledTaskService, Statistics}
 
 import cats.{Eval, Monad, MonadError}
 import cats.effect.syntax.all._
@@ -37,16 +28,14 @@ class Fs2ExecutorService[F[_]: Async](
   def get(stage: ExecutorRoutineStage) = for {
     _ <- stage match {
       case Sleep =>
-        observer.occurred(NothingWasAcquiredLastTimeGoingToSleep(sleepTime)) *> Temporal[F]
-          .sleep(sleepTime)
+        observer.occurred(NothingWasAcquiredLastTimeGoingToSleep(sleepTime)) *> Temporal[F].sleep(sleepTime)
       case Continue => Monad[F].unit
     }
     now <- Temporal[F].realTimeInstant
     _ <- observer.occurred(ExecutorIsAboutToAcquireBatch(now))
-    batch <- SC.construct(service.acquireBatch(now, acquireBatchSize)).handleErrorWith {
-      exception =>
-        observer.occurred(ExecutorFailedDuringAcquiringBatch(now, exception)) *>
-          Monad[F].pure(List.empty)
+    batch <- SC.construct(service.acquireBatch(now, acquireBatchSize)).handleErrorWith { exception =>
+      observer.occurred(ExecutorFailedDuringAcquiringBatch(now, exception)) *>
+        Monad[F].pure(List.empty)
     }
   } yield {
     if (batch.length < 10) {

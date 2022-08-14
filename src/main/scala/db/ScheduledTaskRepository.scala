@@ -23,9 +23,7 @@ object ScheduledTaskRepository {
             (${descriptor.id}, ${descriptor.scheduledAt}, ${descriptor.triggerAt}, ${descriptor.status}, ${descriptor.updatedAt}, ${descriptor.payload})
       """.update.run
 
-  def acquireBatch(
-      now: Instant,
-      limit: Int): Free[connection.ConnectionOp, List[ScheduledTask]] = {
+  def acquireBatch(now: Instant, limit: Int): Free[connection.ConnectionOp, List[ScheduledTask]] = {
     sql"""
         update scheduled_tasks
         set status = ${Status.Acquired}, updated_at = $now
@@ -41,10 +39,7 @@ object ScheduledTaskRepository {
        """.query[ScheduledTask].to[List].map(_.sortBy(_.scheduledAt))
   }
 
-  def done(
-      id: Id[ScheduledTask],
-      now: Instant,
-      payload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
+  def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
     transition(
       id = id,
       now = now,
@@ -80,9 +75,7 @@ object ScheduledTaskRepository {
     (fr"""
         update scheduled_tasks
         set status = $toStatus, updated_at = $now""" ++
-      failedReason
-        .map(failedReason => fr", failed_reason = $failedReason")
-        .getOrElse(Fragment.empty) ++
+      failedReason.map(failedReason => fr", failed_reason = $failedReason").getOrElse(Fragment.empty) ++
       payload.map(payload => fr",payload = $payload ").getOrElse(Fragment.empty) ++ fr"""
         where id = $id and status = $fromStatus
         returning id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload

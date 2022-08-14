@@ -1,14 +1,7 @@
 package rozklad
 package db
 
-import api.{
-  Event,
-  Observer,
-  ScheduledTask,
-  ScheduledTaskService,
-  Status,
-  TaskIsNotInExpectedStatusException
-}
+import api.{Event, Observer, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
 import test.EmbeddedPosrtesqlDBEnv
 import test.fixture.ScheduledTaskFixture
 import test.matcher.ScheduledTaskLogMatchers
@@ -22,10 +15,7 @@ import rozklad.test.mock.RecordingObserver
 
 import java.time.Instant
 
-class DoobieScheduledTaskServiceTest
-    extends AnyFlatSpec
-    with EmbeddedPosrtesqlDBEnv
-    with ScheduledTaskLogMatchers {
+class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlDBEnv with ScheduledTaskLogMatchers {
 
   "DoobieScheduler" should "handle happy path" in new ctx {
     val task = ScheduledTaskFixture.someTask()
@@ -94,9 +84,7 @@ class DoobieScheduledTaskServiceTest
     scheduler.acquireBatch(Instant.now(), 1).r
 
     val failedAt = Instant.now()
-    assert(
-      scheduler.failed(task.id, failedAt, None, None).r == task
-        .copy(status = Status.Failed, updatedAt = failedAt))
+    assert(scheduler.failed(task.id, failedAt, None, None).r == task.copy(status = Status.Failed, updatedAt = failedAt))
 
     val logs = scheduler.logs(task.id).r
 

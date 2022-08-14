@@ -26,22 +26,14 @@ object Event {
 
   case class ExecutorIsAboutToAcquireBatch(now: Instant) extends Event
 
-  case class ExecutorFailedDuringAcquiringBatch(now: Instant, exception: Throwable)
-      extends Event
+  case class ExecutorFailedDuringAcquiringBatch(now: Instant, exception: Throwable) extends Event
 
   case class NothingWasAcquiredLastTimeGoingToSleep(duration: FiniteDuration) extends Event
 
-  case class ExecutionSucceeded(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue])
-      extends Event
+  case class ExecutionSucceeded(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]) extends Event
 
-  case class ExecutionFailed(
-      id: Id[ScheduledTask],
-      now: Instant,
-      reason: Option[FailedReason],
-      payload: Option[JsValue])
-      extends Event
+  case class ExecutionFailed(id: Id[ScheduledTask], now: Instant, reason: Option[FailedReason], payload: Option[JsValue]) extends Event
 
-  case class ExecutionErrored(id: Id[ScheduledTask], now: Instant, exception: Throwable)
-      extends Event
+  case class ExecutionErrored(id: Id[ScheduledTask], now: Instant, exception: Throwable) extends Event
 
 }

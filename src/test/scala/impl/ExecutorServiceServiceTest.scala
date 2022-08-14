@@ -16,10 +16,7 @@ import play.api.libs.json.{JsObject, Json}
 
 import scala.concurrent.duration._
 
-class ExecutorServiceServiceTest
-    extends AnyFlatSpec
-    with ScheduledTaskLogMatchers
-    with MockFactory {
+class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatchers with MockFactory {
 
   "ExecutorService" should "report failing" in new ctx {
     self =>
@@ -76,9 +73,7 @@ class ExecutorServiceServiceTest
     val e = new RuntimeException("error")
     val reason: FailedReason.Exception.type = FailedReason.Exception
     val payload: JsObject = Json.obj("Hui" -> "no")
-    (executor.execute _)
-      .expects(*)
-      .returning(IO(ScheduledTaskOutcome.Failed(Option(reason), Some(payload))))
+    (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Failed(Option(reason), Some(payload))))
 
     val es = createExecutor
 
@@ -116,12 +111,8 @@ class ExecutorServiceServiceTest
   }
 
   it should "end till current acquire and processing is completed" in new ctx {
-    (tasks.acquireBatch _)
-      .expects(*, *)
-      .returning(IO.sleep(5.seconds).uncancelable *> IO(List(task)).uncancelable)
-    (executor.execute _)
-      .expects(*)
-      .returning(IO.sleep(5.seconds).uncancelable *> IO(ScheduledTaskOutcome.Succeeded.empty))
+    (tasks.acquireBatch _).expects(*, *).returning(IO.sleep(5.seconds).uncancelable *> IO(List(task)).uncancelable)
+    (executor.execute _).expects(*).returning(IO.sleep(5.seconds).uncancelable *> IO(ScheduledTaskOutcome.Succeeded.empty))
     val es = createExecutor
     val from = System.currentTimeMillis()
     es.stop.r

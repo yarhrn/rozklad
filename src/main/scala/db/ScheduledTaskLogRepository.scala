@@ -13,12 +13,13 @@ import doobie.implicits._
 import java.time.Instant
 import cats.implicits._
 
-case class ScheduledTaskLog(id: Id[ScheduledTaskLog],
-                            taskId: Id[ScheduledTask],
-                            status: Status,
-                            createdAt: Instant,
-                            failedReason: Option[FailedReason],
-                            payload: JsValue)
+case class ScheduledTaskLog(
+    id: Id[ScheduledTaskLog],
+    taskId: Id[ScheduledTask],
+    status: Status,
+    createdAt: Instant,
+    failedReason: Option[FailedReason],
+    payload: JsValue)
 
 object ScheduledTaskLog {
   def from(task: ScheduledTask): ScheduledTaskLog = {
@@ -35,7 +36,7 @@ object ScheduledTaskLog {
 
 object ScheduledTaskLogRepository {
   def insert(tasks: List[ScheduledTask]): doobie.ConnectionIO[Int] = {
-    val sql ="""
+    val sql = """
         insert into scheduled_tasks_change_log(id, task_id, status, created_at, failed_reason, payload)
         values (?, ?, ?, ?, ?, ?)
      """
@@ -48,9 +49,7 @@ object ScheduledTaskLogRepository {
         from scheduled_tasks_change_log
         where task_id = $id
         order by created_at
-         """
-      .query[ScheduledTaskLog]
-      .to[List]
+         """.query[ScheduledTaskLog].to[List]
   }
 
 }

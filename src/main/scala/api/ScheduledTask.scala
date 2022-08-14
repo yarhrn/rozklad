@@ -7,14 +7,14 @@ import play.api.libs.json.{JsNull, JsValue}
 import java.time.Instant
 import java.util.UUID
 
-
-case class ScheduledTask(id: Id[ScheduledTask],
-                         scheduledAt: Instant,
-                         triggerAt: Instant,
-                         status: Status,
-                         updatedAt: Instant,
-                         failedReason: Option[FailedReason],
-                         payload: JsValue = JsNull)
+case class ScheduledTask(
+    id: Id[ScheduledTask],
+    scheduledAt: Instant,
+    triggerAt: Instant,
+    status: Status,
+    updatedAt: Instant,
+    failedReason: Option[FailedReason],
+    payload: JsValue = JsNull)
 
 case class Id[A](id: UUID) {
   override def toString: String = id.toString
