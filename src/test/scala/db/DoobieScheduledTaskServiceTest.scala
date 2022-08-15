@@ -12,7 +12,7 @@ import org.scalatest.matchers.should.Matchers._
 import play.api.libs.json.Json
 import rozklad.api.Event.{ScheduledTaskDone, ScheduledTaskFailed, ScheduledTasksAcquired}
 import rozklad.test.mock.RecordingObserver
-
+import rozklad.test.implicits.RichScheduledTaskService._
 import java.time.Instant
 
 class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlDBEnv with ScheduledTaskLogMatchers {

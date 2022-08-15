@@ -13,7 +13,7 @@ import org.scalamock.scalatest.MockFactory
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.flatspec.AnyFlatSpec
 import play.api.libs.json.{JsObject, Json}
-
+import rozklad.test.implicits.RichScheduledTaskService._
 import scala.concurrent.duration._
 
 class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatchers with MockFactory {
