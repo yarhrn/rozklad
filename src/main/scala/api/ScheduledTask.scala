@@ -47,5 +47,7 @@ object FailedReason extends IntEnum[Status] {
 
   case object Exception extends FailedReason(1)
 
+  case object NotSupported extends FailedReason(2)
+
   override def values: IndexedSeq[Status] = findValues
 }

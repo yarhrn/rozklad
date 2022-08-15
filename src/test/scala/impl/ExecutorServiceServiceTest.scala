@@ -126,7 +126,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
 
     val observer: RecordingObserver = RecordingObserver()
     val tasks = mock[ScheduledTaskService[IO]]
-    val executor = mock[Executor[IO]]
+    val executor = mock[ScheduledTaskExecutor[IO]]
 
     def giveSucceededExecution = {
       (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))

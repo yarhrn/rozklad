@@ -14,5 +14,6 @@
 - [x] add observer event for failed execution
 - [x] add test 
 - [x] rewrite to the self maid routine
+- [ ] add test for composed executor
 - [] (n)add parallelism for execution service
 - [] (n)add progressive backoff if retrieved batch is zero  

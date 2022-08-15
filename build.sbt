@@ -1,7 +1,8 @@
 import ReleaseTransformations._
 
-name := "rozklad"
+Global / onChangedBuildSource := ReloadOnSourceChanges
 
+name := "rozklad"
 
 organization := "com.yarhrn"
 homepage := Some(url("https://github.com/yarhrn/rozklad"))

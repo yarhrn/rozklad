@@ -1,7 +1,7 @@
 package rozklad
 package impl
 
-import api.{Executor, ExecutorService, FailedReason, Observer, ScheduledTask, ScheduledTaskOutcome, ScheduledTaskService, Statistics}
+import api.{ScheduledTaskExecutor, ExecutorService, FailedReason, Observer, ScheduledTask, ScheduledTaskOutcome, ScheduledTaskService, Statistics}
 
 import cats.{Eval, Monad, MonadError}
 import cats.effect.syntax.all._
@@ -13,14 +13,14 @@ import rozklad.utils.SafeConstruct
 import scala.concurrent.duration._
 
 class Fs2ExecutorService[F[_]: Async](
-    service: ScheduledTaskService[F],
-    stoppedRef: Ref[F, Boolean],
-    executor: Executor[F],
-    streamEndDeferred: Deferred[F, Unit],
-    statisticsRef: Ref[F, Statistics],
-    acquireBatchSize: Int,
-    observer: Observer[F],
-    sleepTime: FiniteDuration)
+                                       service: ScheduledTaskService[F],
+                                       stoppedRef: Ref[F, Boolean],
+                                       executor: ScheduledTaskExecutor[F],
+                                       streamEndDeferred: Deferred[F, Unit],
+                                       statisticsRef: Ref[F, Statistics],
+                                       acquireBatchSize: Int,
+                                       observer: Observer[F],
+                                       sleepTime: FiniteDuration)
     extends ExecutorService[F] {
 
   val SC = implicitly[SafeConstruct[F]]

@@ -5,6 +5,7 @@ import cats.effect._
 import cats.implicits._
 import impl.Fs2ExecutorService
 
+import cats.{Functor, Monad}
 import cats.effect.implicits._
 import play.api.libs.json.JsValue
 
@@ -16,8 +17,28 @@ trait ExecutorService[F[_]] {
   def statistics: F[Statistics]
 }
 
-trait Executor[F[_]] {
+trait ScheduledTaskExecutor[F[_]] {
   def execute(task: ScheduledTask): F[ScheduledTaskOutcome]
+}
+
+object ScheduledTaskExecutor{
+  import cats.implicits._
+
+  def compose[F[_]: Monad](executors: List[ScheduledTaskExecutor[F]]) = new ScheduledTaskExecutor[F] {
+    override def execute(task: ScheduledTask): F[ScheduledTaskOutcome] = {
+      def step(executors: List[ScheduledTaskExecutor[F]]): F[ScheduledTaskOutcome] = {
+        executors match {
+          case head :: next => head.execute(task).flatMap{
+            case ScheduledTaskOutcome.Failed(Some(FailedReason.NotSupported), _) =>
+              step(next)
+            case res => Monad[F].pure(res)
+          }
+          case Nil => Monad[F].pure(ScheduledTaskOutcome.Failed.notSupported)
+        }
+      }
+      step(executors)
+    }
+  }
 }
 
 sealed trait ScheduledTaskOutcome
@@ -34,6 +55,7 @@ object ScheduledTaskOutcome {
 
   object Failed {
     val empty: ScheduledTaskOutcome = Failed(None, None)
+    val notSupported: Failed = Failed(Some(FailedReason.NotSupported), None)
   }
 
 }
@@ -44,10 +66,10 @@ case class Statistics(processed: Int, stopped: Boolean) {
 
 object ExecutorService {
   def start[F[_]: Async](
-      service: ScheduledTaskService[F],
-      routine: Executor[F],
-      observer: Observer[F],
-      sleepTime: FiniteDuration): F[Fs2ExecutorService[F]] = {
+                          service: ScheduledTaskService[F],
+                          routine: ScheduledTaskExecutor[F],
+                          observer: Observer[F],
+                          sleepTime: FiniteDuration): F[Fs2ExecutorService[F]] = {
     for {
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
