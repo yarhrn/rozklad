@@ -37,6 +37,7 @@ class Fs2ExecutorService[F[_]: Async](
       observer.occurred(ExecutorFailedDuringAcquiringBatch(now, exception)) *>
         Monad[F].pure(List.empty)
     }
+    _ <- statisticsRef.update(_.copy(lastAcquireAttempt = Some(now)))
   } yield {
     if (batch.length < 10) {
       batch -> ExecutorRoutineStage.sleep

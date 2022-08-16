@@ -9,6 +9,7 @@ import cats.{Functor, Monad}
 import cats.effect.implicits._
 import play.api.libs.json.JsValue
 
+import java.time.Instant
 import scala.concurrent.duration.FiniteDuration
 
 trait ExecutorService[F[_]] {
@@ -60,7 +61,7 @@ object ScheduledTaskOutcome {
 
 }
 
-case class Statistics(processed: Int, stopped: Boolean) {
+case class Statistics(processed: Int, stopped: Boolean, lastAcquireAttempt: Option[Instant]) {
   def inc: Statistics = copy(processed = processed + 1)
 }
 
@@ -73,7 +74,7 @@ object ExecutorService {
     for {
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
-      statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false))
+      statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None))
       executorService = new Fs2ExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime)
       _ <- executorService.unsafeRoutine.start
     } yield executorService
