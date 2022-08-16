@@ -7,7 +7,6 @@ import rozklad.db.ScheduledTaskLog
 import java.time.Instant
 
 trait ScheduledTaskService[F[_]] {
-  def schedule(id: Id[ScheduledTask], triggerAt: Instant, scheduledAt: Instant, payload: JsValue): F[ScheduledTask]
 
   def acquireBatch(now: Instant, limit: Int): F[List[ScheduledTask]]
 

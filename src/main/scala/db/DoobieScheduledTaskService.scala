@@ -15,22 +15,6 @@ import java.time.Instant
 class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])(implicit ME: MonadCancel[F, Throwable])
     extends ScheduledTaskService[F] {
 
-  override def schedule(id: Id[ScheduledTask], triggerAt: Instant, scheduledAt: Instant, payload: JsValue): F[ScheduledTask] = {
-    val task = ScheduledTask(
-      id,
-      scheduledAt,
-      triggerAt,
-      Status.Created,
-      scheduledAt,
-      None,
-      payload
-    )
-    for {
-      _ <- ScheduledTaskRepository.schedule(task)
-      _ <- ScheduledTaskLogRepository.insert(List(task))
-    } yield task
-  }.transact(xa)
-
   override def acquireBatch(now: Instant, limit: Int): F[List[ScheduledTask]] = {
     for {
       batch <- ScheduledTaskRepository.acquireBatch(now, limit)

@@ -7,12 +7,14 @@ import test.fixture.ScheduledTaskFixture
 import test.matcher.ScheduledTaskLogMatchers
 
 import cats.effect.IO
+import doobie.Transactor
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
 import play.api.libs.json.Json
 import rozklad.api.Event.{ScheduledTaskDone, ScheduledTaskFailed, ScheduledTasksAcquired}
 import rozklad.test.mock.RecordingObserver
 import rozklad.test.implicits.RichScheduledTaskService._
+
 import java.time.Instant
 
 class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlDBEnv with ScheduledTaskLogMatchers {
@@ -24,18 +26,18 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val acquiredAt = Instant.now()
     val acquiredTask: ScheduledTask =
       task.copy(status = Status.Acquired, updatedAt = acquiredAt)
-    assert(scheduler.acquireBatch(acquiredAt, 10).r == List(acquiredTask))
+    assert(tasks.acquireBatch(acquiredAt, 10).r == List(acquiredTask))
     assert(observer.take == ScheduledTasksAcquired(List(acquiredTask)))
     observer.clean
 
     val succeededAt = Instant.now()
     val succeededTask: ScheduledTask =
       task.copy(status = Status.Succeeded, updatedAt = succeededAt)
-    assert(scheduler.done(task.id, succeededAt, None).r == succeededTask)
+    assert(tasks.done(task.id, succeededAt, None).r == succeededTask)
     assert(observer.take == ScheduledTaskDone(succeededTask))
     observer.clean
 
-    val logs = scheduler.logs(task.id).r
+    val logs = tasks.logs(task.id).r
 
     logs should have length 3
 
@@ -52,7 +54,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
     val acquireAt = Instant.now()
     assert(
-      scheduler.acquireBatch(acquireAt, 2).r == List(
+      tasks.acquireBatch(acquireAt, 2).r == List(
         task.copy(status = Status.Acquired, updatedAt = acquireAt),
         task1.copy(status = Status.Acquired, updatedAt = acquireAt)
       ))
@@ -61,32 +63,32 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
   it should "not acquire same tasks twice" in new ctx {
     scheduler.schedule(ScheduledTaskFixture.someTask()).r
 
-    scheduler.acquireBatch(Instant.now(), 100).r should have length 1
-    scheduler.acquireBatch(Instant.now(), 100).r should have length 0
+    tasks.acquireBatch(Instant.now(), 100).r should have length 1
+    tasks.acquireBatch(Instant.now(), 100).r should have length 0
   }
 
   it should "throw an error if done is called on non created task" in new ctx {
     assertThrows[TaskIsNotInExpectedStatusException] {
-      scheduler.done(ScheduledTaskFixture.someTask().id, Instant.now(), None).r
+      tasks.done(ScheduledTaskFixture.someTask().id, Instant.now(), None).r
     }
   }
 
   it should "throw an error if done is called on succeeded task" in new ctx {
     assertThrows[TaskIsNotInExpectedStatusException] {
       val id = scheduler.schedule(ScheduledTaskFixture.someTask()).r.id
-      scheduler.done(id, Instant.now(), None).r
-      scheduler.done(id, Instant.now(), None).r
+      tasks.done(id, Instant.now(), None).r
+      tasks.done(id, Instant.now(), None).r
     }
   }
 
   it should "mark as failed acquired task " in new ctx {
     val task = scheduler.schedule(ScheduledTaskFixture.someTask()).r
-    scheduler.acquireBatch(Instant.now(), 1).r
+    tasks.acquireBatch(Instant.now(), 1).r
 
     val failedAt = Instant.now()
-    assert(scheduler.failed(task.id, failedAt, None, None).r == task.copy(status = Status.Failed, updatedAt = failedAt))
+    assert(tasks.failed(task.id, failedAt, None, None).r == task.copy(status = Status.Failed, updatedAt = failedAt))
 
-    val logs = scheduler.logs(task.id).r
+    val logs = tasks.logs(task.id).r
 
     logs should have size 3
 
@@ -95,16 +97,16 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
   it should "update tasks payload on failed" in new ctx {
     val task = scheduler.schedule(ScheduledTaskFixture.someTask()).r
-    scheduler.acquireBatch(Instant.now(), 1).r
+    tasks.acquireBatch(Instant.now(), 1).r
     observer.clean
     val failedAt = Instant.now()
     val updatedPayload = Json.obj("test" -> "test2")
 
-    val failedTask = scheduler.failed(task.id, failedAt, None, Some(updatedPayload)).r
+    val failedTask = tasks.failed(task.id, failedAt, None, Some(updatedPayload)).r
     assert(failedTask.payload == updatedPayload)
     assert(observer.take == ScheduledTaskFailed(failedTask))
 
-    val logs = scheduler.logs(task.id).r
+    val logs = tasks.logs(task.id).r
 
     logs should have size 3
 
@@ -113,16 +115,16 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
   it should "update tasks payload on done" in new ctx {
     val task = scheduler.schedule(ScheduledTaskFixture.someTask()).r
-    scheduler.acquireBatch(Instant.now(), 1).r
+    tasks.acquireBatch(Instant.now(), 1).r
     observer.clean
     val succeededAt = Instant.now()
     val updatedPayload = Json.obj("test" -> "test2")
 
-    val succeededTask = scheduler.done(task.id, succeededAt, Some(updatedPayload)).r
+    val succeededTask = tasks.done(task.id, succeededAt, Some(updatedPayload)).r
     assert(succeededTask.payload == updatedPayload)
     assert(observer.take == ScheduledTaskDone(succeededTask))
 
-    val logs = scheduler.logs(task.id).r
+    val logs = tasks.logs(task.id).r
 
     logs should have size 3
 
@@ -131,10 +133,11 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
   trait ctx {
     val observer: RecordingObserver = RecordingObserver()
-    val scheduler: ScheduledTaskService[IO] = new DoobieScheduledTaskService[IO](
-      xa("scheduled_tasks", "scheduled_tasks_change_log"),
-      observer
-    )
+    val xaa: Transactor[IO] = xa("scheduled_tasks", "scheduled_tasks_change_log")
+    val tasks: ScheduledTaskService[IO] = new DoobieScheduledTaskService[IO](xaa, observer)
+
+    val scheduler = new DoobieTaskScheduler[IO](xaa)
+
   }
 
 }

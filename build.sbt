@@ -2,6 +2,7 @@ import ReleaseTransformations._
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+
 name := "rozklad"
 
 organization := "com.yarhrn"
@@ -16,7 +17,7 @@ publishMavenStyle := true
 
 scalaVersion := "2.13.8"
 
-idePackagePrefix := Some("rozklad")
+idePackagePrefix.withRank(KeyRanks.Invisible)  := Some("rozklad")
 
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
 libraryDependencies += "org.tpolecat" %% "doobie-core" % "1.0.0-RC2"
