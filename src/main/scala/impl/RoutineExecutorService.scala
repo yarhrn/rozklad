@@ -12,7 +12,7 @@ import rozklad.utils.SafeConstruct
 
 import scala.concurrent.duration._
 
-class Fs2ExecutorService[F[_]: Async](
+class RoutineExecutorService[F[_]: Async](
                                        service: ScheduledTaskService[F],
                                        stoppedRef: Ref[F, Boolean],
                                        executor: ScheduledTaskExecutor[F],
@@ -37,7 +37,7 @@ class Fs2ExecutorService[F[_]: Async](
       observer.occurred(ExecutorFailedDuringAcquiringBatch(now, exception)) *>
         Monad[F].pure(List.empty)
     }
-    _ <- statisticsRef.update(_.copy(lastAcquireAttempt = Some(now)))
+    _ <- statisticsRef.update(_.copy(lastAcquireAttemptAt = Some(now)))
   } yield {
     if (batch.length < 10) {
       batch -> ExecutorRoutineStage.sleep

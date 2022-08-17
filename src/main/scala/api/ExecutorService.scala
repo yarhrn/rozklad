@@ -3,7 +3,7 @@ package api
 
 import cats.effect._
 import cats.implicits._
-import impl.Fs2ExecutorService
+import impl.RoutineExecutorService
 
 import cats.{Functor, Monad}
 import cats.effect.implicits._
@@ -70,13 +70,13 @@ object ExecutorService {
                           service: ScheduledTaskService[F],
                           routine: ScheduledTaskExecutor[F],
                           observer: Observer[F],
-                          sleepTime: FiniteDuration): F[Fs2ExecutorService[F]] = {
+                          sleepTime: FiniteDuration): F[RoutineExecutorService[F]] = {
     for {
       now <- Temporal[F].realTimeInstant
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
       statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None, now))
-      executorService = new Fs2ExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime)
+      executorService = new RoutineExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime)
       _ <- executorService.unsafeRoutine.start
     } yield executorService
   }
