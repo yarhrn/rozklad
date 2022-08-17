@@ -1,5 +1,6 @@
 # Rozklad
-
+## Install
+![version](https://jitpack.io/v/yarhrn/rozklad.svg)
 ## Backlog
 - [ ] write basic documention
 ### Scheduled task service
