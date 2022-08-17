@@ -61,7 +61,7 @@ object ScheduledTaskOutcome {
 
 }
 
-case class Statistics(processed: Int, stopped: Boolean, lastAcquireAttempt: Option[Instant]) {
+case class Statistics(processed: Int, stopped: Boolean, lastAcquireAttemptAt: Option[Instant], startedAt: Instant) {
   def inc: Statistics = copy(processed = processed + 1)
 }
 
@@ -72,9 +72,10 @@ object ExecutorService {
                           observer: Observer[F],
                           sleepTime: FiniteDuration): F[Fs2ExecutorService[F]] = {
     for {
+      now <- Temporal[F].realTimeInstant
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
-      statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None))
+      statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None, now))
       executorService = new Fs2ExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime)
       _ <- executorService.unsafeRoutine.start
     } yield executorService
