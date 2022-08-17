@@ -21,7 +21,7 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
   }
 
   def refreshScheme() = {
-    Thread.sleep(3000)
+    Thread.sleep(5000)
     val connection =
       DriverManager.getConnection(postgres.jdbcUrl, postgres.username, postgres.password)
     val statement = connection.createStatement()
