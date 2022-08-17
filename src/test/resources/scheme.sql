@@ -17,3 +17,6 @@ create table scheduled_tasks_change_log(
     failed_reason smallint ,
     payload jsonb not null
 );
+
+create unique index scheduled_tasks_trigger_at_index
+    on scheduled_tasks(trigger_at);
