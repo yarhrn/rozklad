@@ -9,7 +9,7 @@ Rozklad(means schedule in Ukrainian) is persistent Postgresql based task-queue w
 
 ```scala
 resolvers += "jitpack" at "https://jitpack.io"
-libraryDependencies += "com.github.yarhrn" % "rozklad" % "v0.9"	
+libraryDependencies += "com.github.yarhrn" % "rozklad" % "v{take version from badge above}"	
 ```
 
 ## Usage
