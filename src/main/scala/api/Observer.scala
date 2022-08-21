@@ -1,6 +1,7 @@
 package rozklad
 package api
 
+import cats.Monad
 import play.api.libs.json.JsValue
 
 import java.time.Instant
@@ -10,6 +11,10 @@ trait Observer[F[_]] {
 
   def occurred(event: Event): F[Unit]
 
+}
+
+object Observer{
+  def noop[F[_]: Monad] = (_: Event) => Monad[F].unit
 }
 
 sealed trait Event
