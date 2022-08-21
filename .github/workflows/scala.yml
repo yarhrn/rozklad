@@ -25,5 +25,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: 'sbt'
+    - name: Set up git
+      run: |
+        git config --global user.email "yaroslav.hryniuk+ci@gmail.com"
+        git config --global user.name "yaroslav"
     - name: Release
       run: sbt 'release with-defaults'
