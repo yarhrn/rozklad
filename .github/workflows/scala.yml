@@ -25,9 +25,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: 'sbt'
-    - name: Set up git
-      run: |
-        git config --global user.email "yaroslav.hryniuk+ci@gmail.com"
-        git config --global user.name "yaroslav"
+    - name: Setup GIT token
+      uses: fregante/setup-git-token@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Release
       run: sbt 'release with-defaults'
