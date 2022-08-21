@@ -31,6 +31,7 @@ Low-level approach gives you full control on acquiring and committing task resul
 - `acquireBatch` - atomically and concurrently-safe acquire some number of tasks
 - `done` - mark task as successful
 - `failed` - mark task as failed
+
 To obtain instance of `ScheduledTaskService[F[_]]` you can provide `doobie.Transactor[F[_]]` to the `DoobieScheduledTaskService[F[_]]`.
 
 
