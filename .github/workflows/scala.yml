@@ -25,9 +25,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: 'sbt'
-    - name: Setup GIT token
-      uses: fregante/setup-git-token@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: fregante/setup-git-user@v1
     - name: Release
       run: sbt 'release with-defaults'
