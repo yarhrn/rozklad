@@ -1,6 +1,6 @@
 # Rozklad
 
-Rozklad(means schedule in Ukrainian) is a Postgresql based task-queue with delayed execution. Core capabilities:
+Rozklad(means schedule in Ukrainian) is persistent Postgresql based task-queue with delayed execution. Core capabilities:
 - schedule task to be executed in the future
 - executor that is reading from DB and executing all scheduled tasks (supports multi-node deployment, concurrency is handled by Postgresql)
 
