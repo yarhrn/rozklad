@@ -1,7 +1,7 @@
 package rozklad
 package db
 
-import api.{Event, Observer, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
+import api.{Event, FailedReason, Observer, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
 import test.EmbeddedPosrtesqlDBEnv
 import test.fixture.ScheduledTaskFixture
 import test.matcher.ScheduledTaskLogMatchers
@@ -111,6 +111,17 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     logs should have size 3
 
     assert(logs.last.payload == updatedPayload)
+  }
+ it should "mark as failed with exception" in new ctx {
+    val task = scheduler.schedule(ScheduledTaskFixture.someTask()).r
+    tasks.acquireBatch(Instant.now(), 1).r
+    observer.clean
+    val failedAt = Instant.now()
+
+    val failedTask = tasks.failed(task.id, failedAt, Some(FailedReason.Exception), None).r
+
+   assert(failedTask.failedReason.contains(FailedReason.Exception))
+
   }
 
   it should "update tasks payload on done" in new ctx {

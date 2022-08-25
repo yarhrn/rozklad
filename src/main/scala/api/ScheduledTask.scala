@@ -41,7 +41,7 @@ object Status extends IntEnum[Status] {
 
 sealed abstract class FailedReason(val value: Int) extends IntEnumEntry
 
-object FailedReason extends IntEnum[Status] {
+object FailedReason extends IntEnum[FailedReason] {
 
   case object Expired extends FailedReason(0)
 
@@ -49,5 +49,5 @@ object FailedReason extends IntEnum[Status] {
 
   case object NotSupported extends FailedReason(2)
 
-  override def values: IndexedSeq[Status] = findValues
+  override def values: IndexedSeq[FailedReason] = findValues
 }
