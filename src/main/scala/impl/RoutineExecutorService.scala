@@ -54,14 +54,14 @@ class RoutineExecutorService[F[_]: Async](
             result.flatMap {
               case ScheduledTaskOutcome.Succeeded(payload) =>
                 service.done(task.id, now, payload).void >>
-                  observer.occurred(ExecutionSucceeded(task.id, now, payload))
+                  observer.occurred(ExecutionSucceeded(task, now, payload))
               case ScheduledTaskOutcome.Failed(reason, payload) =>
                 service.failed(task.id, now, reason, payload).void >>
-                  observer.occurred(ExecutionFailed(task.id, now, reason, payload))
+                  observer.occurred(ExecutionFailed(task, now, reason, payload))
             }
           case Outcome.Errored(e) =>
             service.failed(task.id, now, Some(FailedReason.Exception), None).void >>
-              observer.occurred(ExecutionErrored(task.id, now, e))
+              observer.occurred(ExecutionErrored(task, now, e))
           case Outcome.Canceled() => Monad[F].unit
         }
         .uncancelable

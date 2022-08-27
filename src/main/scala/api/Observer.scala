@@ -35,11 +35,11 @@ object Event {
 
   case class NothingWasAcquiredLastTimeGoingToSleep(duration: FiniteDuration) extends Event
 
-  case class ExecutionSucceeded(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]) extends Event
+  case class ExecutionSucceeded(task: ScheduledTask, now: Instant, payload: Option[JsValue]) extends Event
 
-  case class ExecutionFailed(id: Id[ScheduledTask], now: Instant, reason: Option[FailedReason], payload: Option[JsValue]) extends Event
+  case class ExecutionFailed(task: ScheduledTask, now: Instant, reason: Option[FailedReason], payload: Option[JsValue]) extends Event
 
-  case class ExecutionErrored(id: Id[ScheduledTask], now: Instant, exception: Throwable) extends Event
+  case class ExecutionErrored(task: ScheduledTask, now: Instant, exception: Throwable) extends Event
 
   case class ErrorDuringHandlingExecutionResult(task: ScheduledTask, now: Instant, ex: Throwable) extends Event
 

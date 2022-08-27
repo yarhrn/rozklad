@@ -14,7 +14,9 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.flatspec.AnyFlatSpec
 import play.api.libs.json.{JsObject, Json}
 import rozklad.test.implicits.RichScheduledTaskService._
+
 import scala.concurrent.duration._
+import scala.reflect.ClassTag
 
 class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatchers with MockFactory {
 
@@ -52,16 +54,16 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   }
 
   it should "report successful execution" in new ctx {
+    s =>
     (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
+    (tasks.done _).expects(*, *, *).returning(IO(task))
+
     val es = createExecutor
     eventually {
-      assert {
-        observer.events.exists {
-          case ExecutionSucceeded(task.id, _, None) => true
-          case _ => false
-        }
-      }
+      val event = extractEvent[ExecutionSucceeded]
+      assert(event.task == s.task)
+      assert(event.payload.isEmpty)
     }
 
     es.stop.r
@@ -74,16 +76,16 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     val reason: FailedReason.Exception.type = FailedReason.Exception
     val payload: JsObject = Json.obj("Hui" -> "no")
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Failed(Option(reason), Some(payload))))
+    (tasks.failed _).expects(*, *, *, *).returning(IO(task))
 
     val es = createExecutor
 
     eventually {
-      assert {
-        observer.events.exists {
-          case ExecutionFailed(task.id, _, Some(self.reason), Some(self.payload)) => true
-          case _ => false
-        }
-      }
+      val event = extractEvent[ExecutionFailed]
+
+      assert(event.payload.contains(payload))
+      assert(task == event.task)
+      assert(event.reason.contains(reason))
     }
 
   }
@@ -98,12 +100,9 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     val es = createExecutor
 
     eventually {
-      assert {
-        observer.events.exists {
-          case ExecutionErrored(task.id, _, self.e) => true
-          case _ => false
-        }
-      }
+      val event = extractEvent[ExecutionErrored]
+      assert(task == event.task)
+      assert(e == event.exception)
     }
 
     es.stop.r
@@ -141,6 +140,10 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   }
 
   trait ctx extends Shortcuts {
+    def extractEvent[A: ClassTag] = {
+      observer.events.find(implicitly[ClassTag[A]].runtimeClass.isInstance).getOrElse(throw new RuntimeException("not found")).asInstanceOf[A]
+    }
+
     val task: ScheduledTask = ScheduledTaskFixture.someTask()
 
     val observer: RecordingObserver = RecordingObserver()
