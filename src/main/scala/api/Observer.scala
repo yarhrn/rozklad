@@ -13,8 +13,8 @@ trait Observer[F[_]] {
 
 }
 
-object Observer{
-  def noop[F[_]: Monad] = (_: Event) => Monad[F].unit
+object Observer {
+  def noop[F[_] : Monad] = (_: Event) => Monad[F].unit
 }
 
 sealed trait Event
@@ -40,5 +40,7 @@ object Event {
   case class ExecutionFailed(id: Id[ScheduledTask], now: Instant, reason: Option[FailedReason], payload: Option[JsValue]) extends Event
 
   case class ExecutionErrored(id: Id[ScheduledTask], now: Instant, exception: Throwable) extends Event
+
+  case class ErrorDuringHandlingExecutionResult(task: ScheduledTask, now: Instant, ex: Throwable) extends Event
 
 }

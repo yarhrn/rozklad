@@ -13,14 +13,14 @@ import rozklad.utils.SafeConstruct
 import scala.concurrent.duration._
 
 class RoutineExecutorService[F[_]: Async](
-                                       service: ScheduledTaskService[F],
-                                       stoppedRef: Ref[F, Boolean],
-                                       executor: ScheduledTaskExecutor[F],
-                                       streamEndDeferred: Deferred[F, Unit],
-                                       statisticsRef: Ref[F, Statistics],
-                                       acquireBatchSize: Int,
-                                       observer: Observer[F],
-                                       sleepTime: FiniteDuration)
+    service: ScheduledTaskService[F],
+    stoppedRef: Ref[F, Boolean],
+    executor: ScheduledTaskExecutor[F],
+    streamEndDeferred: Deferred[F, Unit],
+    statisticsRef: Ref[F, Statistics],
+    acquireBatchSize: Int,
+    observer: Observer[F],
+    sleepTime: FiniteDuration)
     extends ExecutorService[F] {
 
   val SC = implicitly[SafeConstruct[F]]
@@ -47,30 +47,28 @@ class RoutineExecutorService[F[_]: Async](
   }
 
   private def executeTask(task: ScheduledTask) = {
-    MonadCancel[F]
-      .guaranteeCase(executor.execute(task).uncancelable) { outcome =>
-        for {
-          now <- Temporal[F].realTimeInstant
-          _ <- outcome match {
-            case Outcome.Succeeded(result) =>
-              result.flatMap {
-                case ScheduledTaskOutcome.Succeeded(payload) =>
-                  observer.occurred(ExecutionSucceeded(task.id, now, payload)) >>
-                    service.done(task.id, now, payload)
-                case ScheduledTaskOutcome.Failed(reason, payload) =>
-                  observer.occurred(ExecutionFailed(task.id, now, reason, payload)) >>
-                    service.failed(task.id, now, reason, payload)
-              }
-            case Outcome.Errored(e) =>
-              observer.occurred(ExecutionErrored(task.id, now, e)) >>
-                service.failed(task.id, now, Some(FailedReason.Exception), None)
-            case Outcome.Canceled() => ???
-          }
-        } yield ()
-      }
-      .uncancelable
-      .void
-  }.recover(_ => Monad[F].unit) // improve here???
+    Temporal[F].realTimeInstant.flatMap { now =>
+      MonadCancel[F]
+        .guaranteeCase(SC.construct(executor.execute(task)).uncancelable) {
+          case Outcome.Succeeded(result) =>
+            result.flatMap {
+              case ScheduledTaskOutcome.Succeeded(payload) =>
+                service.done(task.id, now, payload).void >>
+                  observer.occurred(ExecutionSucceeded(task.id, now, payload))
+              case ScheduledTaskOutcome.Failed(reason, payload) =>
+                service.failed(task.id, now, reason, payload).void >>
+                  observer.occurred(ExecutionFailed(task.id, now, reason, payload))
+            }
+          case Outcome.Errored(e) =>
+            service.failed(task.id, now, Some(FailedReason.Exception), None).void >>
+              observer.occurred(ExecutionErrored(task.id, now, e))
+          case Outcome.Canceled() => Monad[F].unit
+        }
+        .uncancelable
+        .void
+        .recoverWith(ex => observer.occurred(ErrorDuringHandlingExecutionResult(task, now, ex)))
+    }
+  }
 
   private def routineStep(stage: ExecutorRoutineStage): F[Unit] = {
     for {

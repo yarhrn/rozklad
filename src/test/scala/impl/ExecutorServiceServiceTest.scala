@@ -118,6 +118,25 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     es.stop.r
     val to = System.currentTimeMillis()
     assert(to.millis - from.millis < 11.seconds.toMillis.millis)
+  }
+
+  it should "propagate error during handling execution result" in new ctx {
+    s =>
+    val ex = new RuntimeException("dsfsdf")
+
+    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
+    (tasks.done _).expects(*, *, *).throws(ex)
+
+    val es = createExecutor
+    eventually {
+      observer.events.exists {
+        case ErrorDuringHandlingExecutionResult(s.task, _, s.ex) => true
+        case _ => false
+      }
+    }
+
+    es.stop.r
 
   }
 
