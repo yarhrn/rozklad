@@ -53,7 +53,7 @@ class RoutineExecutorService[F[_]: Async](
           case Outcome.Succeeded(result) =>
             result.flatMap {
               case ScheduledTaskOutcome.Succeeded(payload) =>
-                service.done(task.id, now, payload).void >>
+                service.succeeded(task.id, now, payload).void >>
                   observer.occurred(ExecutionSucceeded(task, now, payload))
               case ScheduledTaskOutcome.Failed(reason, payload) =>
                 service.failed(task.id, now, reason, payload).void >>

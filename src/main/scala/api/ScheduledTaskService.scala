@@ -10,7 +10,7 @@ trait ScheduledTaskService[F[_]] {
 
   def acquireBatch(now: Instant, limit: Int): F[List[ScheduledTask]]
 
-  def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): F[ScheduledTask]
+  def succeeded(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): F[ScheduledTask]
 
   def failed(id: Id[ScheduledTask], now: Instant, failedReason: Option[FailedReason], payload: Option[JsValue]): F[ScheduledTask]
 

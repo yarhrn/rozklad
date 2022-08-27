@@ -33,7 +33,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val succeededAt = Instant.now()
     val succeededTask: ScheduledTask =
       task.copy(status = Status.Succeeded, updatedAt = succeededAt)
-    assert(tasks.done(task.id, succeededAt, None).r == succeededTask)
+    assert(tasks.succeeded(task.id, succeededAt, None).r == succeededTask)
     assert(observer.take == ScheduledTaskDone(succeededTask))
     observer.clean
 
@@ -69,15 +69,15 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
   it should "throw an error if done is called on non created task" in new ctx {
     assertThrows[TaskIsNotInExpectedStatusException] {
-      tasks.done(ScheduledTaskFixture.someTask().id, Instant.now(), None).r
+      tasks.succeeded(ScheduledTaskFixture.someTask().id, Instant.now(), None).r
     }
   }
 
   it should "throw an error if done is called on succeeded task" in new ctx {
     assertThrows[TaskIsNotInExpectedStatusException] {
       val id = scheduler.schedule(ScheduledTaskFixture.someTask()).r.id
-      tasks.done(id, Instant.now(), None).r
-      tasks.done(id, Instant.now(), None).r
+      tasks.succeeded(id, Instant.now(), None).r
+      tasks.succeeded(id, Instant.now(), None).r
     }
   }
 
@@ -131,7 +131,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val succeededAt = Instant.now()
     val updatedPayload = Json.obj("test" -> "test2")
 
-    val succeededTask = tasks.done(task.id, succeededAt, Some(updatedPayload)).r
+    val succeededTask = tasks.succeeded(task.id, succeededAt, Some(updatedPayload)).r
     assert(succeededTask.payload == updatedPayload)
     assert(observer.take == ScheduledTaskDone(succeededTask))
 

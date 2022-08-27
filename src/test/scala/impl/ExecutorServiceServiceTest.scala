@@ -57,7 +57,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     s =>
     (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
-    (tasks.done _).expects(*, *, *).returning(IO(task))
+    (tasks.succeeded _).expects(*, *, *).returning(IO(task))
 
     val es = createExecutor
     eventually {
@@ -125,7 +125,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
 
     (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
-    (tasks.done _).expects(*, *, *).throws(ex)
+    (tasks.succeeded _).expects(*, *, *).throws(ex)
 
     val es = createExecutor
     eventually {

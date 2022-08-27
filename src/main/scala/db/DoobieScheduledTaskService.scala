@@ -25,7 +25,7 @@ class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])
       if (tasks.isEmpty) observer.occurred(NoScheduledTasksWereAcquired)
       else observer.occurred(ScheduledTasksAcquired(tasks)))
 
-  override def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): F[ScheduledTask] = {
+  override def succeeded(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): F[ScheduledTask] = {
     for {
       task <- ScheduledTaskRepository.done(id, now, payload).validateAndGet(id)
       _ <- ScheduledTaskLogRepository.insert(List(task))
