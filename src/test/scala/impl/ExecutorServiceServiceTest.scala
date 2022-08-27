@@ -13,7 +13,6 @@ import org.scalamock.scalatest.MockFactory
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.flatspec.AnyFlatSpec
 import play.api.libs.json.{JsObject, Json}
-import rozklad.test.implicits.RichScheduledTaskService._
 
 import scala.concurrent.duration._
 import scala.reflect.ClassTag
@@ -26,12 +25,8 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     (tasks.acquireBatch _).expects(*, *).returning(IO.raiseError(e)).once()
     val es = createExecutor
     eventually {
-      assert {
-        observer.events.exists {
-          case ExecutorFailedDuringAcquiringBatch(_, self.e) => true
-          case _ => false
-        }
-      }
+      val event = extractEvent[ExecutorFailedDuringAcquiringBatch]
+      assert(e == event.exception)
     }
 
     es.stop.r
