@@ -19,17 +19,20 @@ case class ScheduledTaskLog(
     status: Status,
     createdAt: Instant,
     failedReason: Option[FailedReason],
-    payload: JsValue)
+    payload: JsValue,
+    triggerAt: Instant)
 
 object ScheduledTaskLog {
   def from(task: ScheduledTask): ScheduledTaskLog = {
+    import task._
     ScheduledTaskLog(
       Id.random,
-      task.id,
-      task.status,
-      task.updatedAt,
-      task.failedReason,
-      task.payload
+      id,
+      status,
+      updatedAt,
+      failedReason,
+      payload,
+      triggerAt
     )
   }
 }
@@ -37,15 +40,15 @@ object ScheduledTaskLog {
 object ScheduledTaskLogRepository {
   def insert(tasks: List[ScheduledTask]): doobie.ConnectionIO[Int] = {
     val sql = """
-        insert into scheduled_tasks_change_log(id, task_id, status, created_at, failed_reason, payload)
-        values (?, ?, ?, ?, ?, ?)
+        insert into scheduled_tasks_change_log(id, task_id, status, created_at, failed_reason, payload, trigger_at)
+        values (?, ?, ?, ?, ?, ?, ?)
      """
     Update[ScheduledTaskLog](sql).updateMany(tasks.map(ScheduledTaskLog.from))
   }
 
   def logs(id: Id[ScheduledTask]): doobie.ConnectionIO[List[ScheduledTaskLog]] = {
     sql"""
-        select id, task_id, status, created_at, failed_reason, payload
+        select id, task_id, status, created_at, failed_reason, payload, trigger_at
         from scheduled_tasks_change_log
         where task_id = $id
         order by created_at

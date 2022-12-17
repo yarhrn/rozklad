@@ -1,7 +1,7 @@
 package rozklad
 package db
 
-import api.{Event, FailedReason, Observer, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
+import api.{Event, FailedReason, Observer, ReschedulingFailed, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
 import test.EmbeddedPosrtesqlDBEnv
 import test.fixture.ScheduledTaskFixture
 import test.matcher.ScheduledTaskLogMatchers
@@ -12,6 +12,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
 import play.api.libs.json.Json
 import rozklad.api.Event.{ScheduledTaskDone, ScheduledTaskFailed, ScheduledTasksAcquired}
+import rozklad.api.Status.Rescheduled
 import rozklad.test.mock.RecordingObserver
 import rozklad.test.implicits.RichScheduledTaskService._
 
@@ -37,7 +38,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert(observer.take == ScheduledTaskDone(succeededTask))
     observer.clean
 
-    val logs = tasks.logs(task.id).r
+    val logs = tasks.logs(task.id).compile.toList.r
 
     logs should have length 3
 
@@ -59,6 +60,58 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
         task1.copy(status = Status.Acquired, updatedAt = acquireAt)
       ))
   }
+
+  it should "fail on scheduling two same tasks" in new ctx {
+    val task = ScheduledTaskFixture.someTask()
+    assert(scheduler.schedule(task).r == task)
+    val updated = task.copy(triggerAt = task.triggerAt.plusSeconds(10))
+    assert(scheduler.schedule(updated).r == updated.copy(status = Rescheduled))
+    println(updated.triggerAt)
+
+    val logs = tasks.logs(task.id).compile.toList.r
+    assert((logs(1).triggerAt.toEpochMilli - logs(0).triggerAt.toEpochMilli) == 10_000)
+  }
+
+  it should "not reschedule acquired task" in new ctx {
+    val task = ScheduledTaskFixture.someTask()
+    scheduler.schedule(task).r
+    val batch = tasks.acquireBatch(Instant.now(), 1).r.head
+
+    assert(task.id == batch.id)
+    assertThrows[ReschedulingFailed] {
+      scheduler.schedule(task).r
+    }
+
+  }
+
+  it should "acquire rescheduled task" in new ctx {
+    val task = ScheduledTaskFixture.someTask()
+    scheduler.schedule(task).r
+    val updated = task.copy(triggerAt = task.triggerAt.plusSeconds(10))
+    scheduler.schedule(task).r
+
+    val batch = tasks.acquireBatch(Instant.now(), 1).r
+
+    assert(batch.length == 1)
+  }
+
+  it should "move to rescheduled from succeeded" in new ctx {
+    val task = ScheduledTaskFixture.someTask()
+    scheduler.schedule(task).r
+    tasks.acquireBatch(Instant.now(), 1).r
+    tasks.succeeded(task.id, Instant.now(), None).r
+    assert(scheduler.schedule(task).r.id == task.id)
+  }
+
+  it should "move to rescheduled from failed" in new ctx {
+    val task = ScheduledTaskFixture.someTask()
+    scheduler.schedule(task).r
+    tasks.acquireBatch(Instant.now(), 1).r
+    tasks.failed(task.id, Instant.now(), None, None).r
+    assert(scheduler.schedule(task).r.id == task.id)
+  }
+
+
 
   it should "not acquire same tasks twice" in new ctx {
     scheduler.schedule(ScheduledTaskFixture.someTask()).r
@@ -88,7 +141,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val failedAt = Instant.now()
     assert(tasks.failed(task.id, failedAt, None, None).r == task.copy(status = Status.Failed, updatedAt = failedAt))
 
-    val logs = tasks.logs(task.id).r
+    val logs = tasks.logs(task.id).compile.toList.r
 
     logs should have size 3
 
@@ -106,13 +159,13 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert(failedTask.payload == updatedPayload)
     assert(observer.take == ScheduledTaskFailed(failedTask))
 
-    val logs = tasks.logs(task.id).r
+    val logs = tasks.logs(task.id).compile.toList.r
 
     logs should have size 3
 
     assert(logs.last.payload == updatedPayload)
   }
- it should "mark as failed with exception" in new ctx {
+  it should "mark as failed with exception" in new ctx {
     val task = scheduler.schedule(ScheduledTaskFixture.someTask()).r
     tasks.acquireBatch(Instant.now(), 1).r
     observer.clean
@@ -120,7 +173,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
     val failedTask = tasks.failed(task.id, failedAt, Some(FailedReason.Exception), None).r
 
-   assert(failedTask.failedReason.contains(FailedReason.Exception))
+    assert(failedTask.failedReason.contains(FailedReason.Exception))
 
   }
 
@@ -135,7 +188,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert(succeededTask.payload == updatedPayload)
     assert(observer.take == ScheduledTaskDone(succeededTask))
 
-    val logs = tasks.logs(task.id).r
+    val logs = tasks.logs(task.id).compile.toList.r
 
     logs should have size 3
 

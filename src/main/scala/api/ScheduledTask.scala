@@ -36,6 +36,8 @@ object Status extends IntEnum[Status] {
 
   case object Failed extends Status(3)
 
+  case object Rescheduled extends Status(4)
+
   override def values: IndexedSeq[Status] = findValues
 }
 

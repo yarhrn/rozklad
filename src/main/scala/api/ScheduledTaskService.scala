@@ -14,7 +14,7 @@ trait ScheduledTaskService[F[_]] {
 
   def failed(id: Id[ScheduledTask], now: Instant, failedReason: Option[FailedReason], payload: Option[JsValue]): F[ScheduledTask]
 
-  def logs(id: Id[ScheduledTask]): F[List[ScheduledTaskLog]]
+  def logs(id: Id[ScheduledTask]): fs2.Stream[F, ScheduledTaskLog]
 }
 
 case class TaskIsNotInExpectedStatusException(id: Id[ScheduledTask]) extends RuntimeException(s"Task ${id} is not in acquired state")

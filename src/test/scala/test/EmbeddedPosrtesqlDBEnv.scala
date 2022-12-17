@@ -23,13 +23,13 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
     refreshScheme()
   }
 
-  def refreshScheme() = {
+  def refreshScheme(): Unit = {
     var attempt: Int = 1
     var connectionOption: Option[Connection] = None
-    while (attempt < 10){
+    while (attempt < 10) {
       Thread.sleep(2000)
       connectionOption = Try(DriverManager.getConnection(postgres.jdbcUrl, postgres.username, postgres.password)).toOption
-      if(connectionOption.isDefined){
+      if (connectionOption.isDefined) {
         attempt = 100
       } else {
         attempt = attempt + 1
@@ -58,11 +58,11 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
       postgres.password
     )
 
-    dbs.foreach { db => doobie.Fragment.const(s"delete from ${db}").update.run.transact(inner).r }
+    dbs.foreach { db => doobie.Fragment.const(s"delete from $db").update.run.transact(inner).r }
 
     inner
   }
 
-  var postgres: PostgreSQLContainer = new PostgreSQLContainer(Some(DockerImageName.parse("postgres:11")))
+  var postgres: PostgreSQLContainer = new PostgreSQLContainer(Some(DockerImageName.parse("postgres:15")))
 
 }

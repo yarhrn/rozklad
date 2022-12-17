@@ -39,8 +39,8 @@ class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])
     } yield task
   }.transact(xa).flatTap(task => observer.occurred(ScheduledTaskFailed(task)))
 
-  override def logs(id: Id[ScheduledTask]): F[List[ScheduledTaskLog]] = {
-    ScheduledTaskLogRepository.logs(id).transact(xa)
+  override def logs(id: Id[ScheduledTask]): fs2.Stream[F, ScheduledTaskLog] = {
+    fs2.Stream.eval(ScheduledTaskLogRepository.logs(id).transact(xa)).flatMap(fs2.Stream(_: _*))
   }
 
   implicit class RichListOfTasks(fa: doobie.ConnectionIO[List[ScheduledTask]]) {

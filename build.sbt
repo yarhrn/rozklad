@@ -25,10 +25,11 @@ libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
 libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.0"
 libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
 
-libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.39.12" % Test
+libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.40.12" % Test
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.1" % Test
 libraryDependencies += "org.postgresql" % "postgresql" % "42.4.1" % Test
 libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.5" % Test
 
 
 releaseProcess := Seq[ReleaseStep](

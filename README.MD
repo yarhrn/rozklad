@@ -23,6 +23,13 @@ Then you can schedule a task by calling `TaskScheduler.schedule`.
 - `triggerAt`: Instant - point in time after which task should be executed
 - `scheduledAt`: Instant - point in time when task is scheduled, e.g. Instant.now
 - `payload`: JsValue - some task specific data
+### Rescheduling
+To support different workflows starting from 1.0.0 added capability to "reschedule" tasks.
+Rescheduling is done via `TaskScheduler.schedule` method. 
+Rescheduling will occur in case there is scheduled task with the same id and status of task is one of `Created`, `Failed`, `Successful` or `Rescheduled`.
+To introspect history of task use `ScheduledTaskService.logs`
+
+
 ### Executing
 There are two ways how scheduled tasks can be executed.
 
@@ -43,9 +50,10 @@ flowchart TD
     acquired --> successful
     acquired --> failed
     created --> rescheduled
-    rescheduled --> acquired
     failed --> rescheduled
     successful --> rescheduled
+    rescheduled --> rescheduled
+    rescheduled --> acquired
 ```
 
 High-level approach is done via `rozklad.api.ExecutorService.start` that accepts 
@@ -75,9 +83,16 @@ create table scheduled_tasks_change_log(
     status smallint not null ,
     created_at timestamp with time zone not null ,
     failed_reason smallint ,
-    payload jsonb not null
+    payload jsonb not null ,
+    trigger_at timestamp with time zone not null
 );
 
 create unique index scheduled_tasks_trigger_at_index
     on scheduled_tasks(trigger_at);
+```
+### Migration
+from 0.14 to 1.0.0
+```sql
+alter table scheduled_tasks_change_log
+    add column trigger_at timestamp with time zone not null default null;
 ```
