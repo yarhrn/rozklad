@@ -42,6 +42,10 @@ flowchart TD
     created --> acquired
     acquired --> successful
     acquired --> failed
+    created --> rescheduled
+    rescheduled --> acquired
+    failed --> rescheduled
+    successful --> rescheduled
 ```
 
 High-level approach is done via `rozklad.api.ExecutorService.start` that accepts 
