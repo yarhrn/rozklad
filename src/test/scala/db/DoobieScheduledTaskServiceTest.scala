@@ -10,9 +10,9 @@ import cats.effect.IO
 import doobie.Transactor
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
-import play.api.libs.json.Json
+import play.api.libs.json.{JsObject, Json}
 import rozklad.api.Event.{ScheduledTaskDone, ScheduledTaskFailed, ScheduledTasksAcquired}
-import rozklad.api.Status.Rescheduled
+import rozklad.api.Status.{Acquired, Rescheduled}
 import rozklad.test.mock.RecordingObserver
 import rozklad.test.implicits.RichScheduledTaskService._
 
@@ -61,12 +61,11 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
       ))
   }
 
-  it should "fail on scheduling two same tasks" in new ctx {
+  it should "not fail on scheduling two same tasks" in new ctx {
     val task = ScheduledTaskFixture.someTask()
     assert(scheduler.schedule(task).r == task)
     val updated = task.copy(triggerAt = task.triggerAt.plusSeconds(10))
     assert(scheduler.schedule(updated).r == updated.copy(status = Rescheduled))
-    println(updated.triggerAt)
 
     val logs = tasks.logs(task.id).compile.toList.r
     assert((logs(1).triggerAt.toEpochMilli - logs(0).triggerAt.toEpochMilli) == 10_000)
@@ -85,28 +84,17 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
   }
 
   it should "acquire rescheduled task" in new ctx {
-    val task = ScheduledTaskFixture.someTask()
-    scheduler.schedule(task).r
-    val updated = task.copy(triggerAt = task.triggerAt.plusSeconds(10))
-    scheduler.schedule(task).r
-
-    val batch = tasks.acquireBatch(Instant.now(), 1).r
-
-    assert(batch.length == 1)
+    givenRescheduledAcquiredTask()
   }
 
   it should "move to rescheduled from succeeded" in new ctx {
-    val task = ScheduledTaskFixture.someTask()
-    scheduler.schedule(task).r
-    tasks.acquireBatch(Instant.now(), 1).r
+    val task = givenRescheduledAcquiredTask()
     tasks.succeeded(task.id, Instant.now(), None).r
     assert(scheduler.schedule(task).r.id == task.id)
   }
 
   it should "move to rescheduled from failed" in new ctx {
-    val task = ScheduledTaskFixture.someTask()
-    scheduler.schedule(task).r
-    tasks.acquireBatch(Instant.now(), 1).r
+    val task = givenRescheduledAcquiredTask()
     tasks.failed(task.id, Instant.now(), None, None).r
     assert(scheduler.schedule(task).r.id == task.id)
   }
@@ -201,6 +189,29 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val tasks: ScheduledTaskService[IO] = new DoobieScheduledTaskService[IO](xaa, observer)
 
     val scheduler = new DoobieTaskScheduler[IO](xaa)
+
+    def givenRescheduledAcquiredTask() = {
+      val task = ScheduledTaskFixture.someTask()
+      val scheduled = scheduler.schedule(task).r
+      assert(scheduled ==  task)
+      val updatedPayload = Json.obj("hui" -> "ne-hui")
+      val rescheduledTriggerAt = Instant.now().plusSeconds(10)
+      val updated = task.copy(triggerAt = rescheduledTriggerAt, payload = updatedPayload)
+      val rescheduled = scheduler.schedule(updated).r
+      assert(updated.copy(status = Rescheduled) == rescheduled)
+      assert(rescheduled.triggerAt == rescheduledTriggerAt)
+      assert(tasks.acquireBatch(Instant.now(), 1).r.isEmpty)
+
+      val batch = tasks.acquireBatch(rescheduledTriggerAt.plusMillis(1), 1).r
+      assert(batch.length == 1)
+
+      val acquired = batch.head
+      assert(acquired.id == task.id)
+      assert(acquired.payload == updatedPayload)
+      assert(acquired.status == Acquired)
+
+      acquired
+    }
 
   }
 
