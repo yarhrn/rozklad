@@ -27,7 +27,7 @@ Then you can schedule a task by calling `TaskScheduler.schedule`.
 To support different workflows starting from 1.0.0 added capability to "reschedule" tasks.
 Rescheduling is done via `TaskScheduler.schedule` method. 
 Rescheduling will occur in case there is scheduled task with the same id and status of task is one of `Created`, `Failed`, `Successful` or `Rescheduled`.
-To introspect history of task use `ScheduledTaskService.logs`
+To introspect history of task use `ScheduledTaskService.logs`. During rescheduling it is possible to update task's trigger at time and payload.
 
 
 ### Executing
