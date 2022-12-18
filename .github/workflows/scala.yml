@@ -1,16 +1,18 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
 name: Scala CI
 
 on:
-  workflow_dispatch:
-  
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -25,6 +27,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: 'sbt'
-    - uses: fregante/setup-git-user@v1
-    - name: Release
-      run: sbt 'release with-defaults'
+    - name: Run tests
+      run: sbt test
