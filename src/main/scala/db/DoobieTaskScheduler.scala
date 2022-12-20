@@ -34,9 +34,7 @@ class DoobieTaskScheduler[F[_]](xa: Transactor[F])(implicit ME: MonadCancel[F, T
           ScheduledTaskRepository.reschedule(scheduledAt, task).map(_.headOption).flatMap {
             case Some(task) => task.pure[ConnectionIO]
             case None =>
-              Clock[ConnectionIO]
-                .realTimeInstant
-                .flatMap(instant => MonadError[ConnectionIO, Throwable].raiseError(ReschedulingFailed(id, instant)))
+              Clock[ConnectionIO].realTimeInstant.flatMap(instant => MonadError[ConnectionIO, Throwable].raiseError(ReschedulingFailed(id, instant)))
           }
       }
       _ <- ScheduledTaskLogRepository.insert(List(task))
