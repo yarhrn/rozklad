@@ -11,7 +11,7 @@ developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.
 licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 publishMavenStyle := true
 
-scalaVersion := "2.13.8"
+scalaVersion := "2.13.10"
 
 idePackagePrefix.withRank(KeyRanks.Invisible) := Some("rozklad")
 
