@@ -22,18 +22,19 @@ trait ScheduledTaskExecutor[F[_]] {
   def execute(task: ScheduledTask): F[ScheduledTaskOutcome]
 }
 
-object ScheduledTaskExecutor{
+object ScheduledTaskExecutor {
   import cats.implicits._
 
   def compose[F[_]: Monad](executors: List[ScheduledTaskExecutor[F]]) = new ScheduledTaskExecutor[F] {
     override def execute(task: ScheduledTask): F[ScheduledTaskOutcome] = {
       def step(executors: List[ScheduledTaskExecutor[F]]): F[ScheduledTaskOutcome] = {
         executors match {
-          case head :: next => head.execute(task).flatMap{
-            case ScheduledTaskOutcome.Failed(Some(FailedReason.NotSupported), _) =>
-              step(next)
-            case res => Monad[F].pure(res)
-          }
+          case head :: next =>
+            head.execute(task).flatMap {
+              case ScheduledTaskOutcome.Failed(Some(FailedReason.NotSupported), _) =>
+                step(next)
+              case res => Monad[F].pure(res)
+            }
           case Nil => Monad[F].pure(ScheduledTaskOutcome.Failed.notSupported)
         }
       }
@@ -67,10 +68,10 @@ case class Statistics(processed: Int, stopped: Boolean, lastAcquireAttemptAt: Op
 
 object ExecutorService {
   def start[F[_]: Async](
-                          service: ScheduledTaskService[F],
-                          routine: ScheduledTaskExecutor[F],
-                          observer: Observer[F],
-                          sleepTime: FiniteDuration): F[RoutineExecutorService[F]] = {
+      service: ScheduledTaskService[F],
+      routine: ScheduledTaskExecutor[F],
+      observer: Observer[F],
+      sleepTime: FiniteDuration): F[RoutineExecutorService[F]] = {
     for {
       now <- Temporal[F].realTimeInstant
       stopSignal <- Ref.of(false)
