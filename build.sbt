@@ -15,7 +15,7 @@ scalaVersion := "2.13.8"
 
 idePackagePrefix.withRank(KeyRanks.Invisible) := Some("rozklad")
 
-libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.3"
 libraryDependencies += "org.tpolecat" %% "doobie-core" % "1.0.0-RC2"
 libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
 libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.2"
