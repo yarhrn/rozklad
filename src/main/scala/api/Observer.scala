@@ -14,7 +14,7 @@ trait Observer[F[_]] {
 }
 
 object Observer {
-  def noop[F[_] : Monad] = (_: Event) => Monad[F].unit
+  def noop[F[_]: Monad] = (_: Event) => Monad[F].unit
 }
 
 sealed trait Event

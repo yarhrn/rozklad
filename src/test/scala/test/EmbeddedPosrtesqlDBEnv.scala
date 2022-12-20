@@ -12,7 +12,6 @@ import doobie.implicits._
 
 import scala.util.Try
 
-
 trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
   self: Suite =>
 
@@ -37,7 +36,6 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
     }
 
     val connection = connectionOption.getOrElse(throw new RuntimeException("cant obtain connection to test DB"))
-
 
     val statement = connection.createStatement()
     val source = io.Source.fromResource("./scheme.sql")
