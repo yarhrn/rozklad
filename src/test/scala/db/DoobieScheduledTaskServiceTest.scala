@@ -99,8 +99,6 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert(scheduler.schedule(task).r.id == task.id)
   }
 
-
-
   it should "not acquire same tasks twice" in new ctx {
     scheduler.schedule(ScheduledTaskFixture.someTask()).r
 
@@ -193,7 +191,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     def givenRescheduledAcquiredTask() = {
       val task = ScheduledTaskFixture.someTask()
       val scheduled = scheduler.schedule(task).r
-      assert(scheduled ==  task)
+      assert(scheduled == task)
       val updatedPayload = Json.obj("hui" -> "ne-hui")
       val rescheduledTriggerAt = Instant.now().plusSeconds(10)
       val updated = task.copy(triggerAt = rescheduledTriggerAt, payload = updatedPayload)
