@@ -22,7 +22,7 @@ libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.2"
 libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
 
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.40.12" % Test
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.14" % Test
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % Test
 libraryDependencies += "org.postgresql" % "postgresql" % "42.5.1" % Test
 libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.5" % Test
