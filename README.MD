@@ -94,5 +94,5 @@ create unique index scheduled_tasks_trigger_at_index
 from 0.14 to 1.0.0
 ```sql
 alter table scheduled_tasks_change_log
-    add column trigger_at timestamp with time zone not null default null;
+    add column trigger_at timestamp with time zone default null;
 ```
