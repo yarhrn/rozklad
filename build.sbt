@@ -11,14 +11,11 @@ ThisBuild / name := "rozklad"
 ThisBuild / organization := "com.yarhrn"
 ThisBuild / homepage := Some(url("https://github.com/yarhrn/rozklad"))
 ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/yarhrn/rozklad"), "git@github.com:yarhrn/rozklad.git"))
-ThisBuild / developers := List(Developer("Yaroslav Hryniuk",
-  "Yaroslav Hryniuk",
-  "yaroslavh.hryniuk@gmail.com",
-  url("https://github.com/yarhrn")))
+ThisBuild / developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.hryniuk@gmail.com", url("https://github.com/yarhrn")))
 ThisBuild / licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 ThisBuild / publishMavenStyle := true
 
-idePackagePrefix.withRank(KeyRanks.Invisible)  := Some("rozklad")
+idePackagePrefix.withRank(KeyRanks.Invisible) := Some("rozklad")
 
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
 libraryDependencies += "org.tpolecat" %% "doobie-core" % "1.0.0-RC2"
@@ -32,16 +29,15 @@ libraryDependencies += "org.postgresql" % "postgresql" % "42.4.1" % Test
 libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.5" % Test
 
-
 releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,              // : ReleaseStep
-  inquireVersions,                        // : ReleaseStep
-  runClean,                               // : ReleaseStep
-  runTest,                                // : ReleaseStep
-  setReleaseVersion,                      // : ReleaseStep
-  commitReleaseVersion,                   // : ReleaseStep, performs the initial git checks
-  tagRelease,                             // : ReleaseStep
-  setNextVersion,                         // : ReleaseStep
-  commitNextVersion,                      // : ReleaseStep
-  pushChanges                             // : ReleaseStep, also checks that an upstream branch is properly configured
+  checkSnapshotDependencies, // : ReleaseStep
+  inquireVersions, // : ReleaseStep
+  runClean, // : ReleaseStep
+  runTest, // : ReleaseStep
+  setReleaseVersion, // : ReleaseStep
+  commitReleaseVersion, // : ReleaseStep, performs the initial git checks
+  tagRelease, // : ReleaseStep
+  setNextVersion, // : ReleaseStep
+  commitNextVersion, // : ReleaseStep
+  pushChanges // : ReleaseStep, also checks that an upstream branch is properly configured
 )
