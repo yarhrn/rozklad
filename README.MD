@@ -87,10 +87,17 @@ create table scheduled_tasks_change_log(
     trigger_at timestamp with time zone not null
 );
 
-create unique index scheduled_tasks_trigger_at_index
-    on scheduled_tasks(trigger_at);
+create index scheduled_tasks_status_trigger_at_index
+    on scheduled_tasks (status, trigger_at);
 ```
 ### Migration
+from 1.0.1 to 1.0.2
+```sql
+drop index if exists scheduled_tasks_change_log;
+create index scheduled_tasks_status_trigger_at_index
+    on scheduled_tasks (status, trigger_at);
+```
+
 from 0.14 to 1.0.0
 ```sql
 alter table scheduled_tasks_change_log

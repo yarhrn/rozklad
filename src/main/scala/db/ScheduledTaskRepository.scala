@@ -36,7 +36,8 @@ object ScheduledTaskRepository {
         where id in (
             select id
             from scheduled_tasks
-            where (status = ${Status.Created} or status = ${Status.Rescheduled}) and trigger_at < $now
+            where (status = ${Status.Created} and trigger_at < $now) or 
+                  (status = ${Status.Rescheduled} and trigger_at < $now) 
             order by scheduled_at
             for update skip locked
             limit $limit
