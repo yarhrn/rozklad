@@ -1,8 +1,7 @@
-package rozklad
-package test.fixture
+package rozklad.test.fixture
 
 import java.time.Instant
-import api.{FailedReason, Id, ScheduledTask, Status}
+import rozklad.api.{FailedReason, Id, ScheduledTask, Status}
 
 object ScheduledTaskFixture {
 

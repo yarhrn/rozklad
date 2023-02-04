@@ -1,5 +1,4 @@
-package rozklad
-package api
+package rozklad.api
 
 import play.api.libs.json.JsValue
 import java.time.Instant

@@ -1,8 +1,6 @@
-package rozklad
-package db
+package rozklad.db
 
-import api.{Id, ReschedulingFailed, ScheduledTask, Status, TaskScheduler}
-
+import rozklad.api.{Id, Observer, ReschedulingFailed, ScheduledTask, Status, TaskScheduler}
 import cats.MonadError
 import cats.effect.Clock
 import cats.effect.kernel.MonadCancel
@@ -11,11 +9,13 @@ import play.api.libs.json.JsValue
 import doobie.implicits._
 import cats.implicits._
 import doobie.free.connection.ConnectionIO
+import rozklad.api.Event.{TaskRescheduled, TaskScheduled}
+import rozklad.api.Status.Created
 import rozklad.db.ScheduledTaskRepository.InsertDuplicate
 
 import java.time.Instant
 
-class DoobieTaskScheduler[F[_]](xa: Transactor[F])(implicit ME: MonadCancel[F, Throwable]) extends TaskScheduler[F] {
+class DoobieTaskScheduler[F[_]](xa: Transactor[F], observer: Observer[F])(implicit ME: MonadCancel[F, Throwable]) extends TaskScheduler[F] {
 
   override def schedule(id: Id[ScheduledTask], triggerAt: Instant, scheduledAt: Instant, payload: JsValue): F[ScheduledTask] = {
     val task = ScheduledTask(
@@ -39,6 +39,12 @@ class DoobieTaskScheduler[F[_]](xa: Transactor[F])(implicit ME: MonadCancel[F, T
       }
       _ <- ScheduledTaskLogRepository.insert(List(task))
     } yield task
-  }.transact(xa)
+  }.transact(xa).flatTap { task =>
+    if (task.status == Created) {
+      observer.occurred(TaskScheduled(task))
+    } else {
+      observer.occurred(TaskRescheduled(task))
+    }
+  }
 
 }

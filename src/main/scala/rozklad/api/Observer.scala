@@ -1,5 +1,4 @@
-package rozklad
-package api
+package rozklad.api
 
 import cats.Monad
 import play.api.libs.json.JsValue
@@ -42,5 +41,9 @@ object Event {
   case class ExecutionErrored(task: ScheduledTask, now: Instant, exception: Throwable) extends Event
 
   case class ErrorDuringHandlingExecutionResult(task: ScheduledTask, now: Instant, ex: Throwable) extends Event
+
+  case class TaskRescheduled(task: ScheduledTask) extends Event
+
+  case class TaskScheduled(tas: ScheduledTask) extends Event
 
 }

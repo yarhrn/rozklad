@@ -1,5 +1,4 @@
-package rozklad
-package test
+package rozklad.test
 
 import cats.effect.IO
 import com.dimafeng.testcontainers.PostgreSQLContainer
@@ -16,9 +15,7 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
   self: Suite =>
 
   override def beforeAll(): Unit = {
-    println("here1")
     postgres.start()
-    println(s"url: ${postgres.jdbcUrl}, username: ${postgres.username}, password: ${postgres.password}")
     refreshScheme()
   }
 

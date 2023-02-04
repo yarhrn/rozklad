@@ -1,19 +1,19 @@
-package rozklad
-package impl
+package rozklad.impl
 
-import api.Event._
-import api._
-import test.Shortcuts
-import test.fixture.ScheduledTaskFixture
-import test.matcher.ScheduledTaskLogMatchers
-import test.mock.RecordingObserver
-
-import cats.effect.{IO, Sync}
+import rozklad.api.Event._
+import rozklad.api._
+import rozklad.test.Shortcuts
+import rozklad.test.fixture.ScheduledTaskFixture
+import rozklad.test.matcher.ScheduledTaskLogMatchers
+import rozklad.test.mock.RecordingObserver
+import cats.effect.IO
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.flatspec.AnyFlatSpec
 import play.api.libs.json.{JsObject, Json}
 
+import java.time.Instant
+import java.util.concurrent.atomic.AtomicBoolean
 import scala.concurrent.duration._
 import scala.reflect.ClassTag
 
@@ -67,13 +67,12 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   it should "report failed execution" in new ctx {
     self =>
     (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
-    val e = new RuntimeException("error")
     val reason: FailedReason.Exception.type = FailedReason.Exception
     val payload: JsObject = Json.obj("Hui" -> "no")
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Failed(Option(reason), Some(payload))))
     (tasks.failed _).expects(*, *, *, *).returning(IO(task))
 
-    val es = createExecutor
+    createExecutor
 
     eventually {
       val event = extractEvent[ExecutionFailed]
@@ -134,6 +133,25 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
 
   }
 
+  it should "rescheduled task" in new ctx { s =>
+    val scheduleCalled = new AtomicBoolean(false)
+    val rescheduledPayload = Json.obj("monitor" -> "coospo")
+    val reschedulingTriggerAt = Instant.now()
+
+    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Rescheduled(rescheduledPayload, reschedulingTriggerAt)))
+    val rescheduled = ScheduledTask(task.id, task.scheduledAt, task.triggerAt, Status.Rescheduled, Instant.now(), None, rescheduledPayload)
+    (scheduler.schedule _).expects(task.id, reschedulingTriggerAt, task.scheduledAt, rescheduledPayload).returning(IO(scheduleCalled.set(true)) *> IO(rescheduled))
+
+    val es = createExecutor
+    eventually {
+      assert(scheduleCalled.get())
+    }
+
+    es.stop
+
+  }
+
   trait ctx extends Shortcuts {
     def extractEvent[A: ClassTag] = {
       observer.events.find(implicitly[ClassTag[A]].runtimeClass.isInstance).getOrElse(throw new RuntimeException("not found")).asInstanceOf[A]
@@ -144,13 +162,14 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     val observer: RecordingObserver = RecordingObserver()
     val tasks = mock[ScheduledTaskService[IO]]
     val executor = mock[ScheduledTaskExecutor[IO]]
+    val scheduler = mock[TaskScheduler[IO]]
 
     def giveSucceededExecution = {
       (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
     }
 
     def createExecutor: ExecutorService[IO] =
-      ExecutorService.start(tasks, executor, observer, 1.second).r
+      ExecutorService.start(tasks, executor, observer, 1.second, scheduler).r
   }
 
 }

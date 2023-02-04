@@ -1,8 +1,6 @@
-package rozklad
-package test.mock
+package rozklad.test.mock
 
-import api.{Event, Observer}
-
+import rozklad.api.{Event, Observer}
 import cats.effect.{IO, Ref}
 import rozklad.test.Shortcuts
 
@@ -15,6 +13,8 @@ class RecordingObserver(ref: Ref[IO, List[Event]]) extends Observer[IO] with Sho
   def clean = ref.set(List.empty).r
 
   def take = ref.get.map(_.head).r
+
+  def last = ref.get.map(_.last).r
 
 }
 

@@ -1,20 +1,18 @@
-package rozklad
-package db
-
-import api.{Event, FailedReason, Observer, ReschedulingFailed, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
-import test.EmbeddedPosrtesqlDBEnv
-import test.fixture.ScheduledTaskFixture
-import test.matcher.ScheduledTaskLogMatchers
+package rozklad.db
 
 import cats.effect.IO
 import doobie.Transactor
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
-import play.api.libs.json.{JsObject, Json}
-import rozklad.api.Event.{ScheduledTaskDone, ScheduledTaskFailed, ScheduledTasksAcquired}
+import play.api.libs.json.Json
+import rozklad.api.Event.{ScheduledTaskDone, ScheduledTaskFailed, ScheduledTasksAcquired, TaskRescheduled, TaskScheduled}
+import rozklad.api.{FailedReason, ReschedulingFailed, ScheduledTask, ScheduledTaskService, Status, TaskIsNotInExpectedStatusException}
 import rozklad.api.Status.{Acquired, Rescheduled}
+import rozklad.test.EmbeddedPosrtesqlDBEnv
+import rozklad.test.fixture.ScheduledTaskFixture
 import rozklad.test.mock.RecordingObserver
 import rozklad.test.implicits.RichScheduledTaskService._
+import rozklad.test.matcher.ScheduledTaskLogMatchers
 
 import java.time.Instant
 
@@ -24,18 +22,20 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val task = ScheduledTaskFixture.someTask()
     scheduler.schedule(task).r
 
+    assert(observer.take == TaskScheduled(task))
+
     val acquiredAt = Instant.now()
     val acquiredTask: ScheduledTask =
       task.copy(status = Status.Acquired, updatedAt = acquiredAt)
     assert(tasks.acquireBatch(acquiredAt, 10).r == List(acquiredTask))
-    assert(observer.take == ScheduledTasksAcquired(List(acquiredTask)))
+    assert(observer.last == ScheduledTasksAcquired(List(acquiredTask)))
     observer.clean
 
     val succeededAt = Instant.now()
     val succeededTask: ScheduledTask =
       task.copy(status = Status.Succeeded, updatedAt = succeededAt)
     assert(tasks.succeeded(task.id, succeededAt, None).r == succeededTask)
-    assert(observer.take == ScheduledTaskDone(succeededTask))
+    assert(observer.last == ScheduledTaskDone(succeededTask))
     observer.clean
 
     val logs = tasks.logs(task.id).compile.toList.r
@@ -90,13 +90,19 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
   it should "move to rescheduled from succeeded" in new ctx {
     val task = givenRescheduledAcquiredTask()
     tasks.succeeded(task.id, Instant.now(), None).r
-    assert(scheduler.schedule(task).r.id == task.id)
+    val rescheduled: ScheduledTask = scheduler.schedule(task).r
+    assert(rescheduled.id == task.id)
+    assert(rescheduled.status == Rescheduled)
+    assert(observer.last == TaskRescheduled(rescheduled))
   }
 
   it should "move to rescheduled from failed" in new ctx {
     val task = givenRescheduledAcquiredTask()
     tasks.failed(task.id, Instant.now(), None, None).r
-    assert(scheduler.schedule(task).r.id == task.id)
+    val rescheduled: ScheduledTask = scheduler.schedule(task).r
+    assert(rescheduled.id == task.id)
+    assert(rescheduled.status == Rescheduled)
+    assert(observer.last == TaskRescheduled(rescheduled))
   }
 
   it should "not acquire same tasks twice" in new ctx {
@@ -186,7 +192,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     val xaa: Transactor[IO] = xa("scheduled_tasks", "scheduled_tasks_change_log")
     val tasks: ScheduledTaskService[IO] = new DoobieScheduledTaskService[IO](xaa, observer)
 
-    val scheduler = new DoobieTaskScheduler[IO](xaa)
+    val scheduler = new DoobieTaskScheduler[IO](xaa, observer)
 
     def givenRescheduledAcquiredTask() = {
       val task = ScheduledTaskFixture.someTask()
