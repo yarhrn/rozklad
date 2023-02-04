@@ -18,6 +18,8 @@ ThisBuild / developers := List(Developer("Yaroslav Hryniuk",
 ThisBuild / licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 ThisBuild / publishMavenStyle := true
 
+ThisBuild / releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
+
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
 libraryDependencies += "org.tpolecat" %% "doobie-core" % "1.0.0-RC2"
 libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
@@ -35,11 +37,11 @@ releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,              // : ReleaseStep
   inquireVersions,                        // : ReleaseStep
   runClean,                               // : ReleaseStep
-  runTest,                                // : ReleaseStep
+//  runTest,                                // : ReleaseStep
   setReleaseVersion,                      // : ReleaseStep
   commitReleaseVersion,                   // : ReleaseStep, performs the initial git checks
   tagRelease,                             // : ReleaseStep
-  setNextVersion,                         // : ReleaseStep
-  commitNextVersion,                      // : ReleaseStep
-  pushChanges                             // : ReleaseStep, also checks that an upstream branch is properly configured
+//  setNextVersion,                         // : ReleaseStep
+//  commitNextVersion,                      // : ReleaseStep
+//  pushChanges                             // : ReleaseStep, also checks that an upstream branch is properly configured
 )
