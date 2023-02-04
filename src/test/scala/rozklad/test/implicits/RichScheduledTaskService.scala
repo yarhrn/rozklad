@@ -1,7 +1,6 @@
-package rozklad
-package test.implicits
+package rozklad.test.implicits
 
-import api.{ScheduledTask, ScheduledTaskService, TaskScheduler}
+import rozklad.api.{ScheduledTask, TaskScheduler}
 
 object RichScheduledTaskService {
 

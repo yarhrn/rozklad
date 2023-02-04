@@ -1,7 +1,6 @@
-package rozklad
-package db
+package rozklad.db
 
-import api._
+import rozklad.api._
 
 import cats.effect.kernel.MonadCancel
 import cats.implicits._

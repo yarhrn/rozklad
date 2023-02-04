@@ -1,13 +1,11 @@
-package rozklad
-package api
+package rozklad.api
 
 import cats.effect._
 import cats.implicits._
-import impl.RoutineExecutorService
-
-import cats.{Functor, Monad}
+import cats.Monad
 import cats.effect.implicits._
 import play.api.libs.json.JsValue
+import rozklad.impl.RoutineExecutorService
 
 import java.time.Instant
 import scala.concurrent.duration.FiniteDuration
@@ -51,6 +49,8 @@ object ScheduledTaskOutcome {
 
   case class Failed(reason: Option[FailedReason], payload: Option[JsValue]) extends ScheduledTaskOutcome
 
+  case class Rescheduled(payload: JsValue, triggerAt: Instant) extends ScheduledTaskOutcome
+
   object Succeeded {
     val empty: ScheduledTaskOutcome = Succeeded(None)
   }
@@ -71,13 +71,14 @@ object ExecutorService {
       service: ScheduledTaskService[F],
       routine: ScheduledTaskExecutor[F],
       observer: Observer[F],
-      sleepTime: FiniteDuration): F[RoutineExecutorService[F]] = {
+      sleepTime: FiniteDuration,
+      scheduler: TaskScheduler[F]): F[RoutineExecutorService[F]] = {
     for {
       now <- Temporal[F].realTimeInstant
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
       statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None, now))
-      executorService = new RoutineExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime)
+      executorService = new RoutineExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime, scheduler)
       _ <- executorService.unsafeRoutine.start
     } yield executorService
   }

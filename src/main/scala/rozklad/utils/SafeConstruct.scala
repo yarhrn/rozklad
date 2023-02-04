@@ -1,5 +1,4 @@
-package rozklad
-package utils
+package rozklad.utils
 
 import cats.{Eval, MonadError}
 import cats.implicits._

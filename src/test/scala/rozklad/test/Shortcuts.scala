@@ -1,5 +1,4 @@
-package rozklad
-package test
+package rozklad.test
 
 import cats.effect.IO
 

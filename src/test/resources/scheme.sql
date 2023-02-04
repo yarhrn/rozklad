@@ -20,5 +20,5 @@ create table scheduled_tasks_change_log
     trigger_at    timestamp with time zone not null
 );
 
-create unique index scheduled_tasks_trigger_at_index
-    on scheduled_tasks (trigger_at);
+create index scheduled_tasks_status_trigger_at_index
+    on scheduled_tasks (status, trigger_at);

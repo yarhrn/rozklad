@@ -1,7 +1,5 @@
-package rozklad
-package test.matcher
+package rozklad.test.matcher
 
-import org.scalatest.matchers.should.Matchers.have
 import org.scalatest.matchers.{MatchResult, Matcher}
 import rozklad.api.{Id, ScheduledTask, Status}
 import rozklad.db.ScheduledTaskLog
