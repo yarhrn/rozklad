@@ -1,5 +1,4 @@
-package rozklad
-package api
+package rozklad.api
 
 import enumeratum.values.{IntEnum, IntEnumEntry}
 import play.api.libs.json.{JsNull, JsValue}

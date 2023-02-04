@@ -1,9 +1,17 @@
-package rozklad
-package impl
+package rozklad.impl
 
-import api.{ScheduledTaskExecutor, ExecutorService, FailedReason, Observer, ScheduledTask, ScheduledTaskOutcome, ScheduledTaskService, Statistics}
-
-import cats.{Eval, Monad, MonadError}
+import rozklad.api.{
+  ExecutorService,
+  FailedReason,
+  Observer,
+  ScheduledTask,
+  ScheduledTaskExecutor,
+  ScheduledTaskOutcome,
+  ScheduledTaskService,
+  Statistics,
+  TaskScheduler
+}
+import cats.Monad
 import cats.effect.syntax.all._
 import cats.effect._
 import cats.implicits._
@@ -20,7 +28,8 @@ class RoutineExecutorService[F[_]: Async](
     statisticsRef: Ref[F, Statistics],
     acquireBatchSize: Int,
     observer: Observer[F],
-    sleepTime: FiniteDuration)
+    sleepTime: FiniteDuration,
+    scheduler: TaskScheduler[F])
     extends ExecutorService[F] {
 
   val SC = implicitly[SafeConstruct[F]]
@@ -58,6 +67,8 @@ class RoutineExecutorService[F[_]: Async](
               case ScheduledTaskOutcome.Failed(reason, payload) =>
                 service.failed(task.id, now, reason, payload).void >>
                   observer.occurred(ExecutionFailed(task, now, reason, payload))
+              case ScheduledTaskOutcome.Rescheduled(payload, triggerAt) =>
+                scheduler.schedule(task.id, triggerAt, task.scheduledAt, payload).void
             }
           case Outcome.Errored(e) =>
             service.failed(task.id, now, Some(FailedReason.Exception), None).void >>

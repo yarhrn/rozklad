@@ -1,11 +1,9 @@
-package rozklad
-package db
+package rozklad.db
 
-import api.{FailedReason, Id, ScheduledTask, Status}
+import rozklad.api.{FailedReason, Id, ScheduledTask, Status}
 
 import doobie._
 import play.api.libs.json.JsValue
-import db._
 
 import doobie.postgres.implicits._
 import doobie.implicits._

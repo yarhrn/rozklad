@@ -6,16 +6,16 @@ lazy val scala212 = "2.12.16"
 lazy val scala213 = "2.13.6"
 lazy val supportedScalaVersions = List(scala212, scala213)
 
+ThisBuild / scalacOptions ++= Seq("-target:jvm-1.8", "-deprecation", "-feature", "-Wunused", "-Ywarn-value-discard")
 ThisBuild / scalaVersion := scala213
-ThisBuild / name := "rozklad"
 ThisBuild / organization := "com.yarhrn"
 ThisBuild / homepage := Some(url("https://github.com/yarhrn/rozklad"))
 ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/yarhrn/rozklad"), "git@github.com:yarhrn/rozklad.git"))
 ThisBuild / developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.hryniuk@gmail.com", url("https://github.com/yarhrn")))
 ThisBuild / licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 ThisBuild / publishMavenStyle := true
+releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
 
-idePackagePrefix.withRank(KeyRanks.Invisible) := Some("rozklad")
 
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.4"
 libraryDependencies += "org.tpolecat" %% "doobie-core" % "1.0.0-RC2"

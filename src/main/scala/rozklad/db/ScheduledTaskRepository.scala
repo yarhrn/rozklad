@@ -1,21 +1,14 @@
-package rozklad
-package db
+package rozklad.db
 
-import api.{FailedReason, Id, ScheduledTask, Status}
-import db._
-
-import cats.Monad
+import rozklad.api.{FailedReason, Id, ScheduledTask, Status}
 import cats.free.Free
 import doobie.free.connection
 import doobie.implicits._
 import doobie.postgres.implicits._
-import doobie.util.fragment.Fragment
 import doobie.util.fragments
 import play.api.libs.json.JsValue
 import cats.implicits._
 import doobie.free.connection.ConnectionIO
-
-import java.sql.SQLException
 import java.time.Instant
 
 object ScheduledTaskRepository {
@@ -36,7 +29,8 @@ object ScheduledTaskRepository {
         where id in (
             select id
             from scheduled_tasks
-            where (status = ${Status.Created} or status = ${Status.Rescheduled}) and trigger_at < $now
+            where (status = ${Status.Created} and trigger_at < $now) or 
+                  (status = ${Status.Rescheduled} and trigger_at < $now) 
             order by scheduled_at
             for update skip locked
             limit $limit
