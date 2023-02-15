@@ -1,5 +1,7 @@
 package rozklad.db
 
+import cats.Monad
+import cats.data.NonEmptyList
 import rozklad.api.{FailedReason, Id, ScheduledTask, Status}
 import cats.free.Free
 import doobie.free.connection
@@ -9,6 +11,7 @@ import doobie.util.fragments
 import play.api.libs.json.JsValue
 import cats.implicits._
 import doobie.free.connection.ConnectionIO
+
 import java.time.Instant
 
 object ScheduledTaskRepository {
@@ -23,21 +26,29 @@ object ScheduledTaskRepository {
       """.update.run.flatMap { result => if (result == 0) InsertDuplicate().raiseError[ConnectionIO, Int] else result.pure[ConnectionIO] }
 
   def acquireBatch(now: Instant, limit: Int): Free[connection.ConnectionOp, List[ScheduledTask]] = {
-    sql"""
-        with ready_to_acquire as (
-            select id
-               from scheduled_tasks
-               where (status = ${Status.Created} and trigger_at < $now) or
-                     (status = ${Status.Rescheduled} and trigger_at < $now)
-               order by scheduled_at
-               limit $limit
-        )
-        update scheduled_tasks
-        set status = ${Status.Acquired}, updated_at = $now
-        from ready_to_acquire
-        where scheduled_tasks.id = ready_to_acquire.id
-        returning scheduled_tasks.id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload
-       """.query[ScheduledTask].to[List].map(_.sortBy(_.scheduledAt))
+    for {
+      ids <- sql"""
+          select id
+                       from scheduled_tasks
+                       where (status = ${Status.Created} and trigger_at < $now) or
+                             (status = ${Status.Rescheduled} and trigger_at < $now)
+                       order by scheduled_at
+                       limit $limit
+            for update skip locked
+           """.query[Id[ScheduledTask]].to[List]
+      tasks <- NonEmptyList.fromList(ids) match {
+        case Some(value) =>
+          (fr"""
+                  update scheduled_tasks
+                  set status = ${Status.Acquired}, updated_at = $now
+             """ ++ fragments.whereAnd(fragments.in(fr"id", value)) ++
+            fr" returning scheduled_tasks.id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload")
+            .query[ScheduledTask]
+            .to[List]
+            .map(_.sortBy(_.scheduledAt))
+        case None => Monad[ConnectionIO].pure(List())
+      }
+    } yield tasks
   }
 
   def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
