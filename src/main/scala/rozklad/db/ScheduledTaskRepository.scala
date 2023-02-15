@@ -24,18 +24,19 @@ object ScheduledTaskRepository {
 
   def acquireBatch(now: Instant, limit: Int): Free[connection.ConnectionOp, List[ScheduledTask]] = {
     sql"""
+        with ready_to_acquire as (
+            select id
+               from scheduled_tasks
+               where (status = ${Status.Created} and trigger_at < $now) or
+                     (status = ${Status.Rescheduled} and trigger_at < $now)
+               order by scheduled_at
+               limit $limit
+        )
         update scheduled_tasks
         set status = ${Status.Acquired}, updated_at = $now
-        where id in (
-            select id
-            from scheduled_tasks
-            where (status = ${Status.Created} and trigger_at < $now) or 
-                  (status = ${Status.Rescheduled} and trigger_at < $now) 
-            order by scheduled_at
-            for update skip locked
-            limit $limit
-        )
-        returning id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload
+        from ready_to_acquire
+        where scheduled_tasks.id = ready_to_acquire.id
+        returning scheduled_tasks.id, scheduled_at, trigger_at, status, updated_at, failed_reason, payload
        """.query[ScheduledTask].to[List].map(_.sortBy(_.scheduledAt))
   }
 
