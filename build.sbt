@@ -10,7 +10,7 @@ scmInfo := Some(ScmInfo(url("https://github.com/yarhrn/rozklad"), "git@github.co
 developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.hryniuk@gmail.com", url("https://github.com/yarhrn")))
 licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 publishMavenStyle := true
-
+releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
 scalaVersion := "2.13.10"
 
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.3"
