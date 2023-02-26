@@ -78,7 +78,16 @@ object ExecutorService {
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
       statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None, now))
-      executorService = new RoutineExecutorService[F](service, stopSignal, routine, streamEndDeferred, statisticsRef, 10, observer, sleepTime, scheduler)
+      executorService = new RoutineExecutorService[F](
+        service,
+        stopSignal,
+        routine,
+        streamEndDeferred,
+        statisticsRef,
+        10,
+        observer,
+        sleepTime,
+        scheduler)
       _ <- executorService.unsafeRoutine.start
     } yield executorService
   }

@@ -141,7 +141,9 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Rescheduled(rescheduledPayload, reschedulingTriggerAt)))
     val rescheduled = ScheduledTask(task.id, task.scheduledAt, task.triggerAt, Status.Rescheduled, Instant.now(), None, rescheduledPayload)
-    (scheduler.schedule _).expects(task.id, reschedulingTriggerAt, task.scheduledAt, rescheduledPayload).returning(IO(scheduleCalled.set(true)) *> IO(rescheduled))
+    (scheduler.schedule _)
+      .expects(task.id, reschedulingTriggerAt, task.scheduledAt, rescheduledPayload)
+      .returning(IO(scheduleCalled.set(true)) *> IO(rescheduled))
 
     val es = createExecutor
     eventually {
