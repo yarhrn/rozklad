@@ -20,7 +20,7 @@ libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.2"
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.40.12" % Test
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % Test
 libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.5" % Test
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.6" % Test
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies, // : ReleaseStep
