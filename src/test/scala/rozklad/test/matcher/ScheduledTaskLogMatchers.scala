@@ -1,8 +1,7 @@
 package rozklad.test.matcher
 
 import org.scalatest.matchers.{MatchResult, Matcher}
-import rozklad.api.{Id, ScheduledTask, Status}
-import rozklad.db.ScheduledTaskLog
+import rozklad.api.{Id, ScheduledTask, ScheduledTaskLog, Status}
 
 import java.time.Instant
 import scala.reflect.ClassTag

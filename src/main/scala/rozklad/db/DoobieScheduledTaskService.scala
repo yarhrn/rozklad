@@ -11,13 +11,18 @@ import rozklad.api.Event._
 
 import java.time.Instant
 
-class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])(implicit ME: MonadCancel[F, Throwable])
+class DoobieScheduledTaskService[F[_]](
+    xa: Transactor[F],
+    observer: Observer[F],
+    scheduledTaskRepository: ScheduledTaskRepository = new DoobieScheduledTaskRepository(DefaultScheduledTasksTableName),
+    scheduledTaskLogsRepository: ScheduledTaskLogRepository = new DoobieScheduledTaskLogRepository(DefaultScheduledTasksLogsTableName))(
+    implicit ME: MonadCancel[F, Throwable])
     extends ScheduledTaskService[F] {
 
   override def acquireBatch(now: Instant, limit: Int): F[List[ScheduledTask]] = {
     for {
-      batch <- ScheduledTaskRepository.acquireBatch(now, limit)
-      _ <- ScheduledTaskLogRepository.insert(batch)
+      batch <- scheduledTaskRepository.acquireBatch(now, limit)
+      _ <- scheduledTaskLogsRepository.insert(batch)
     } yield batch
   }.transact(xa)
     .flatTap(tasks =>
@@ -26,20 +31,24 @@ class DoobieScheduledTaskService[F[_]](xa: Transactor[F], observer: Observer[F])
 
   override def succeeded(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): F[ScheduledTask] = {
     for {
-      task <- ScheduledTaskRepository.done(id, now, payload).validateAndGet(id)
-      _ <- ScheduledTaskLogRepository.insert(List(task))
+      task <- scheduledTaskRepository.done(id, now, payload).validateAndGet(id)
+      _ <- scheduledTaskLogsRepository.insert(List(task))
     } yield task
   }.transact(xa).flatTap(task => observer.occurred(ScheduledTaskDone(task)))
 
   override def failed(id: Id[ScheduledTask], now: Instant, failedReason: Option[FailedReason], updatedPayload: Option[JsValue]): F[ScheduledTask] = {
     for {
-      task <- ScheduledTaskRepository.failed(id, now, failedReason, updatedPayload).validateAndGet(id)
-      _ <- ScheduledTaskLogRepository.insert(List(task))
+      task <- scheduledTaskRepository.failed(id, now, failedReason, updatedPayload).validateAndGet(id)
+      _ <- scheduledTaskLogsRepository.insert(List(task))
     } yield task
   }.transact(xa).flatTap(task => observer.occurred(ScheduledTaskFailed(task)))
 
   override def logs(id: Id[ScheduledTask]): fs2.Stream[F, ScheduledTaskLog] = {
-    fs2.Stream.eval(ScheduledTaskLogRepository.logs(id).transact(xa)).flatMap(fs2.Stream(_: _*))
+    fs2.Stream.eval(scheduledTaskLogsRepository.select(id).transact(xa)).flatMap(fs2.Stream(_: _*))
+  }
+
+  override def task(id: Id[ScheduledTask]): F[Option[ScheduledTask]] = {
+    scheduledTaskRepository.select(id).transact(xa)
   }
 
   implicit class RichListOfTasks(fa: doobie.ConnectionIO[List[ScheduledTask]]) {

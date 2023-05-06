@@ -189,7 +189,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
 
   trait ctx {
     val observer: RecordingObserver = RecordingObserver()
-    val xaa: Transactor[IO] = xa("scheduled_tasks", "scheduled_tasks_change_log")
+    val xaa: Transactor[IO] = xa(DefaultScheduledTasksTableName, DefaultScheduledTasksLogsTableName)
     val tasks: ScheduledTaskService[IO] = new DoobieScheduledTaskService[IO](xaa, observer)
 
     val scheduler = new DoobieTaskScheduler[IO](xaa, observer)

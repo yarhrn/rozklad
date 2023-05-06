@@ -9,6 +9,9 @@ import play.api.libs.json.{JsValue, Json}
 import java.util.UUID
 
 package object db {
+  val DefaultScheduledTasksTableName = "scheduled_tasks"
+  val DefaultScheduledTasksLogsTableName = "scheduled_tasks_change_log"
+
   implicit def idMeta[A]: Meta[Id[A]] =
     Meta[String].imap(s => Id[A](UUID.fromString(s)))(id => id.id.toString)
 
