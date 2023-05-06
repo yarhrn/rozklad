@@ -68,7 +68,7 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert(scheduler.schedule(updated).r == updated.copy(status = Rescheduled))
 
     val logs = tasks.logs(task.id).compile.toList.r
-    assert((logs(1).triggerAt.toEpochMilli - logs(0).triggerAt.toEpochMilli) == 10_000)
+    assert((logs(1).triggerAt.get.toEpochMilli - logs(0).triggerAt.get.toEpochMilli) == 10_000)
   }
 
   it should "not reschedule acquired task" in new ctx {

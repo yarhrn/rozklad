@@ -28,7 +28,7 @@ case class ScheduledTaskLog(
                              createdAt: Instant,
                              failedReason: Option[FailedReason],
                              payload: JsValue,
-                             triggerAt: Instant)
+                             triggerAt: Option[Instant])
 
 object ScheduledTaskLog {
   def from(task: ScheduledTask): ScheduledTaskLog = {
@@ -40,7 +40,7 @@ object ScheduledTaskLog {
       updatedAt,
       failedReason,
       payload,
-      triggerAt
+      Some(triggerAt)
     )
   }
 }
