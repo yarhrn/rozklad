@@ -18,7 +18,8 @@ class DoobieTaskScheduler[F[_]](
     xa: Transactor[F],
     observer: Observer[F],
     scheduledTaskRepository: ScheduledTaskRepository = new DoobieScheduledTaskRepository(DefaultScheduledTasksTableName),
-    scheduledTaskLogsRepository: ScheduledTaskLogRepository = new DoobieScheduledTaskLogRepository(DefaultScheduledTasksLogsTableName))(implicit ME: MonadCancel[F, Throwable])
+    scheduledTaskLogsRepository: ScheduledTaskLogRepository = new DoobieScheduledTaskLogRepository(DefaultScheduledTasksLogsTableName))(
+    implicit ME: MonadCancel[F, Throwable])
     extends TaskScheduler[F] {
 
   override def schedule(id: Id[ScheduledTask], triggerAt: Instant, scheduledAt: Instant, payload: JsValue): F[ScheduledTask] = {
