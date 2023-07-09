@@ -42,6 +42,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
                 where (status = ${Status.Created} and trigger_at < $now) or
                       (status = ${Status.Rescheduled} and trigger_at < $now)
                 order by scheduled_at
+                FOR UPDATE SKIP LOCKED
                 limit $limit
          )
          update """ ++ Fragment.const(table) ++
