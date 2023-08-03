@@ -22,13 +22,13 @@ trait ScheduledTaskService[F[_]] {
 case class TaskIsNotInExpectedStatusException(id: Id[ScheduledTask]) extends RuntimeException(s"Task ${id} is not in acquired state")
 
 case class ScheduledTaskLog(
-                             id: Id[ScheduledTaskLog],
-                             taskId: Id[ScheduledTask],
-                             status: Status,
-                             createdAt: Instant,
-                             failedReason: Option[FailedReason],
-                             payload: JsValue,
-                             triggerAt: Option[Instant])
+    id: Id[ScheduledTaskLog],
+    taskId: Id[ScheduledTask],
+    status: Status,
+    createdAt: Instant,
+    failedReason: Option[FailedReason],
+    payload: JsValue,
+    triggerAt: Option[Instant])
 
 object ScheduledTaskLog {
   def from(task: ScheduledTask): ScheduledTaskLog = {
