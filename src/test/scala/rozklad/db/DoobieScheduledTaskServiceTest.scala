@@ -71,17 +71,14 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert((logs(1).triggerAt.get.toEpochMilli - logs(0).triggerAt.get.toEpochMilli) == 10_000)
   }
 
-  it should "not reschedule acquired task" in new ctx {
-    val task = ScheduledTaskFixture.someTask()
-    scheduler.schedule(task).r
-    val batch = tasks.acquireBatch(Instant.now(), 1).r.head
-
-    assert(task.id == batch.id)
-    assertThrows[ReschedulingFailed] {
-      scheduler.schedule(task).r
-    }
-
+  it should "move to rescheduled from aquired" in new ctx {
+    val task = givenRescheduledAcquiredTask()
+    val rescheduled: ScheduledTask = scheduler.schedule(task).r
+    assert(rescheduled.id == task.id)
+    assert(rescheduled.status == Rescheduled)
+    assert(observer.last == TaskRescheduled(rescheduled))
   }
+
 
   it should "acquire rescheduled task" in new ctx {
     givenRescheduledAcquiredTask()

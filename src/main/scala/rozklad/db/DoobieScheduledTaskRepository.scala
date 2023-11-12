@@ -89,6 +89,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       List(
         Status.Created,
         Status.Rescheduled,
+        Status.Acquired,
         Status.Failed,
         Status.Succeeded
       ),
