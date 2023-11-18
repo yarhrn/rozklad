@@ -79,7 +79,6 @@ class DoobieScheduledTaskServiceTest extends AnyFlatSpec with EmbeddedPosrtesqlD
     assert(observer.last == TaskRescheduled(rescheduled))
   }
 
-
   it should "acquire rescheduled task" in new ctx {
     givenRescheduledAcquiredTask()
   }
