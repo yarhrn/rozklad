@@ -21,5 +21,4 @@ trait ScheduledTaskRepository {
       updatedPayload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]]
 }
 
-
 case class InsertDuplicate() extends RuntimeException

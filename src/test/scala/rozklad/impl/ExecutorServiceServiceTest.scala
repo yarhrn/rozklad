@@ -20,8 +20,7 @@ import scala.reflect.ClassTag
 class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatchers with MockFactory {
 
   "ExecutorService" should "report failing" in new ctx {
-    self =>
-    val e = new RuntimeException("test")
+    self => val e = new RuntimeException("test")
     (tasks.acquireBatch _).expects(*, *).returning(IO.raiseError(e)).once()
     val es = createExecutor
     eventually {
@@ -49,8 +48,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   }
 
   it should "report successful execution" in new ctx {
-    s =>
-    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    s => (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
     (tasks.succeeded _).expects(*, *, *).returning(IO(task))
 
@@ -65,8 +63,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   }
 
   it should "report failed execution" in new ctx {
-    self =>
-    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    self => (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     val reason: FailedReason.Exception.type = FailedReason.Exception
     val payload: JsObject = Json.obj("Hui" -> "no")
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Failed(Option(reason), Some(payload))))
@@ -85,8 +82,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   }
 
   it should "report errored execution" in new ctx {
-    self =>
-    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    self => (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (tasks.failed _).expects(*, *, *, *).returning(IO(task))
     val e = new RuntimeException("error")
     (executor.execute _).expects(*).returning(IO.raiseError(e))
@@ -114,8 +110,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   }
 
   it should "propagate error during handling execution result" in new ctx {
-    s =>
-    val ex = new RuntimeException("dsfsdf")
+    s => val ex = new RuntimeException("dsfsdf")
 
     (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))

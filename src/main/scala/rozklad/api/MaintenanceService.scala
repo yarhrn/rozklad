@@ -1,6 +1,5 @@
 package rozklad.api
 
-
 trait MaintenanceService[F[_]] {
 
   def remove(id: Id[ScheduledTask]): F[RemovedScheduledTask]
