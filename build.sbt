@@ -13,14 +13,14 @@ publishMavenStyle := true
 releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
 scalaVersion := "2.13.10"
 
-libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.3"
-libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC2"
-libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.2"
+libraryDependencies += "org.playframework" %% "play-json" % "3.0.4"
+libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC5"
+libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.4"
 
-libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.40.14" % Test
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % Test
-libraryDependencies += "org.scalamock" %% "scalamock" % "5.2.0" % Test
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.6" % Test
+libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.41.4" % Test
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
+libraryDependencies += "org.scalamock" %% "scalamock" % "6.0.0" % Test
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.6" % Test
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies, // : ReleaseStep

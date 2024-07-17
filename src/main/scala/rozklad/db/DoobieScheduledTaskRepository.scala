@@ -1,8 +1,9 @@
 package rozklad.db
 
+import cats.data.NonEmptyList
 import cats.free.Free
 import cats.implicits._
-import doobie.Update0
+import doobie.{Fragments, Update0}
 import doobie.free.connection
 import doobie.postgres.implicits._
 import doobie.free.connection.ConnectionIO
@@ -73,7 +74,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       now = now,
       failedReason = None,
       payload = payload,
-      fromStatus = List(Status.Acquired),
+      fromStatus = NonEmptyList.of(Status.Acquired),
       toStatus = Status.Succeeded,
       None,
       None
@@ -86,7 +87,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       now,
       None,
       Option(descriptor.payload),
-      List(
+      NonEmptyList.of(
         Status.Created,
         Status.Rescheduled,
         Status.Acquired,
@@ -109,7 +110,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       now = now,
       failedReason = failedReason,
       payload = updatedPayload,
-      fromStatus = List(Status.Acquired),
+      fromStatus = NonEmptyList.of(Status.Acquired),
       toStatus = Status.Failed,
       None,
       None
@@ -121,7 +122,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       now: Instant,
       failedReason: Option[FailedReason],
       payload: Option[JsValue],
-      fromStatus: List[Status],
+      fromStatus: NonEmptyList[Status],
       toStatus: Status,
       triggerAt: Option[Instant],
       scheduledAt: Option[Instant]): doobie.ConnectionIO[List[ScheduledTask]] = {
@@ -132,16 +133,23 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
 
     val where = fragments.whereAnd(
       fr"id = $id ",
-      fragments.or(fromStatus.map(status => fr""" status = $status """): _*)
+      fragments.or(fromStatus.map(status => fr""" status = $status """), withParen = true)
     )
 
-    val set = fragments.setOpt(
-      Option(fr"status = $toStatus"),
-      Option(fr"updated_at = $now"),
-      triggerAt.map(triggerAt => fr"trigger_at = $triggerAt"),
-      scheduledAt.map(scheduledAt => fr"scheduled_at = $scheduledAt"),
-      failedReason.map(failedReason => fr"failed_reason = $failedReason"),
-      payload.map(payload => fr"payload = $payload ")
+    val set = fragments.set(
+      NonEmptyList
+        .of(
+          fr"status = $toStatus",
+          fr"updated_at = $now"
+        )
+        .appendList(
+          List(
+            triggerAt.map(triggerAt => fr"trigger_at = $triggerAt"),
+            scheduledAt.map(scheduledAt => fr"scheduled_at = $scheduledAt"),
+            failedReason.map(failedReason => fr"failed_reason = $failedReason"),
+            payload.map(payload => fr"payload = $payload ")
+          ).flatten
+        )
     )
 
     val query = update ++

@@ -150,7 +150,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
       assert(scheduleCalled.get())
     }
 
-    es.stop
+    es.stop.r
 
   }
 

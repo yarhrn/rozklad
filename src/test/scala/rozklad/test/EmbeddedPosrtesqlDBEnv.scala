@@ -50,7 +50,8 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
       "org.postgresql.Driver",
       postgres.jdbcUrl,
       postgres.username,
-      postgres.password
+      postgres.password,
+      None
     )
 
     dbs.foreach { db => doobie.Fragment.const(s"delete from $db").update.run.transact(inner).r }
