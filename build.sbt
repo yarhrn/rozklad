@@ -11,7 +11,7 @@ developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.
 licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 publishMavenStyle := true
 releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
-scalaVersion := "2.13.10"
+scalaVersion := "2.13.15"
 
 libraryDependencies += "org.playframework" %% "play-json" % "3.0.4"
 libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC5"
