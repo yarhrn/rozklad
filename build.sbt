@@ -11,16 +11,16 @@ developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.
 licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 publishMavenStyle := true
 releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
-scalaVersion := "2.13.10"
+scalaVersion := "2.13.16"
 
 libraryDependencies += "org.playframework" %% "play-json" % "3.0.4"
-libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC5"
-libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.4"
+libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9"
+libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.5"
 
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.41.4" % Test
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
 libraryDependencies += "org.scalamock" %% "scalamock" % "6.0.0" % Test
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.6" % Test
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.11" % Test
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies, // : ReleaseStep
