@@ -14,7 +14,7 @@ releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).v
 scalaVersion := "2.13.16"
 
 libraryDependencies += "org.playframework" %% "play-json" % "3.0.4"
-libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9"
+libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC10"
 libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.5"
 
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.41.4" % Test
