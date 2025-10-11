@@ -13,7 +13,7 @@ publishMavenStyle := true
 releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
 scalaVersion := "2.13.16"
 
-libraryDependencies += "org.playframework" %% "play-json" % "3.0.4"
+libraryDependencies += "org.playframework" %% "play-json" % "3.0.6"
 libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9"
 libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.5"
 
