@@ -22,7 +22,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
   implicit class Update0Rich(update: Update0) {
 
     def returningScheduledTask: doobie.ConnectionIO[List[ScheduledTask]] = {
-      update.withGeneratedKeys[ScheduledTask](ScheduledTaskColumns: _*).compile.toList
+      update.withGeneratedKeys[ScheduledTask](ScheduledTaskColumns*).compile.toList
     }
   }
 

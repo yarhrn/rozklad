@@ -44,7 +44,7 @@ class DoobieScheduledTaskService[F[_]](
   }.transact(xa).flatTap(task => observer.occurred(ScheduledTaskFailed(task)))
 
   override def logs(id: Id[ScheduledTask]): fs2.Stream[F, ScheduledTaskLog] = {
-    fs2.Stream.eval(scheduledTaskLogsRepository.select(id).transact(xa)).flatMap(fs2.Stream(_: _*))
+    fs2.Stream.eval(scheduledTaskLogsRepository.select(id).transact(xa)).flatMap(logs => fs2.Stream(logs*))
   }
 
   override def task(id: Id[ScheduledTask]): F[Option[ScheduledTask]] = {

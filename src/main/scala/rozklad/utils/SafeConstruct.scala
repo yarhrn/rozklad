@@ -10,7 +10,7 @@ trait SafeConstruct[F[_]] {
 }
 
 object SafeConstruct {
-  implicit def fromMonadError[F[_]](implicit ME: MonadError[F, Throwable]) =
+  implicit def fromMonadError[F[_]](implicit ME: MonadError[F, Throwable]): SafeConstruct[F] =
     new SafeConstruct[F] {
       override def construct[A](fa: => F[A]): F[A] =
         ME.catchNonFatalEval(Eval.always(fa)).flatten

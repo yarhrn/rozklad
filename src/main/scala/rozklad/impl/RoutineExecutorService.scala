@@ -89,7 +89,7 @@ class RoutineExecutorService[F[_]: Async](
       stopped <- stoppedRef.get
       _ <-
         if (stopped) {
-          streamEndDeferred.complete(())
+          streamEndDeferred.complete(()).void
         } else {
           routineStep(stage)
         }
