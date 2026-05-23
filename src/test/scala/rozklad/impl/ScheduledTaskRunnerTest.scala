@@ -13,17 +13,18 @@ import org.scalatest.flatspec.AnyFlatSpec
 import play.api.libs.json.{JsObject, Json}
 
 import java.time.Instant
+import java.util.concurrent.TimeoutException
 import java.util.concurrent.atomic.AtomicBoolean
 import scala.concurrent.duration._
 import scala.reflect.ClassTag
 
-class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatchers with MockFactory {
+class ScheduledTaskRunnerTest extends AnyFlatSpec with ScheduledTaskLogMatchers with MockFactory {
 
-  "ExecutorService" should "report failing" in new ctx {
+  "ScheduledTaskRunner" should "report failing" in new ctx {
     self =>
     val e = new RuntimeException("test")
     (tasks.acquireBatch _).expects(*, *).returning(IO.raiseError(e)).once()
-    val es = createExecutor
+    val es = createRunner()
     eventually {
       val event = extractEvent[ExecutorFailedDuringAcquiringBatch]
       assert(e == event.exception)
@@ -35,7 +36,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   it should "report sleep event" in new ctx {
     (tasks.acquireBatch _).expects(*, *).returning(IO(List())).once()
 
-    val es = createExecutor
+    val es = createRunner()
     eventually {
       assert {
         observer.events.exists {
@@ -54,7 +55,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
     (tasks.succeeded _).expects(*, *, *).returning(IO(task))
 
-    val es = createExecutor
+    val es = createRunner()
     eventually {
       val event = extractEvent[ExecutionSucceeded]
       assert(event.task == s.task)
@@ -72,7 +73,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Failed(Option(reason), Some(payload))))
     (tasks.failed _).expects(*, *, *, *).returning(IO(task))
 
-    createExecutor
+    createRunner()
 
     eventually {
       val event = extractEvent[ExecutionFailed]
@@ -91,7 +92,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     val e = new RuntimeException("error")
     (executor.execute _).expects(*).returning(IO.raiseError(e))
 
-    val es = createExecutor
+    val es = createRunner()
 
     eventually {
       val event = extractEvent[ExecutionErrored]
@@ -106,7 +107,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
   it should "end till current acquire and processing is completed" in new ctx {
     (tasks.acquireBatch _).expects(*, *).returning(IO.sleep(5.seconds).uncancelable *> IO(List(task)).uncancelable)
     (executor.execute _).expects(*).returning(IO.sleep(5.seconds).uncancelable *> IO(ScheduledTaskOutcome.Succeeded.empty))
-    val es = createExecutor
+    val es = createRunner()
     val from = System.currentTimeMillis()
     es.stop.r
     val to = System.currentTimeMillis()
@@ -121,7 +122,7 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
     (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
     (tasks.succeeded _).expects(*, *, *).throws(ex)
 
-    val es = createExecutor
+    val es = createRunner()
     eventually {
       observer.events.exists {
         case ErrorDuringHandlingExecutionResult(s.task, _, s.ex) => true
@@ -145,13 +146,45 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
       .expects(task.id, reschedulingTriggerAt, task.scheduledAt, rescheduledPayload)
       .returning(IO(scheduleCalled.set(true)) *> IO(rescheduled))
 
-    val es = createExecutor
+    val es = createRunner()
     eventually {
       assert(scheduleCalled.get())
     }
 
     es.stop.r
 
+  }
+
+  it should "fail task when execution exceeds timeout" in new ctx {
+    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    (executor.execute _).expects(*).returning(IO.sleep(5.seconds) *> IO(ScheduledTaskOutcome.Succeeded.empty))
+    (tasks.failed _).expects(*, *, *, *).returning(IO(task))
+
+    val es = createRunner(executionTimeout = Some(100.millis))
+
+    eventually {
+      val event = extractEvent[ExecutionErrored]
+      assert(event.task == task)
+      assert(event.exception.isInstanceOf[TimeoutException])
+    }
+
+    es.stop.r
+  }
+
+  it should "succeed when execution completes within timeout" in new ctx {
+    s =>
+    (tasks.acquireBatch _).expects(*, *).returning(IO(List(task)))
+    (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
+    (tasks.succeeded _).expects(*, *, *).returning(IO(task))
+
+    val es = createRunner(executionTimeout = Some(5.seconds))
+
+    eventually {
+      val event = extractEvent[ExecutionSucceeded]
+      assert(event.task == s.task)
+    }
+
+    es.stop.r
   }
 
   trait ctx extends Shortcuts {
@@ -170,8 +203,8 @@ class ExecutorServiceServiceTest extends AnyFlatSpec with ScheduledTaskLogMatche
       (executor.execute _).expects(*).returning(IO(ScheduledTaskOutcome.Succeeded.empty))
     }
 
-    def createExecutor: ExecutorService[IO] =
-      ExecutorService.start(tasks, executor, observer, 1.second, scheduler).r
+    def createRunner(executionTimeout: Option[FiniteDuration] = None): ScheduledTaskRunner[IO] =
+      ScheduledTaskRunner.start(tasks, executor, observer, 1.second, scheduler, executionTimeout).r
   }
 
 }

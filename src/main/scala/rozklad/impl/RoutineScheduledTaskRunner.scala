@@ -1,12 +1,12 @@
 package rozklad.impl
 
 import rozklad.api.{
-  ExecutorService,
   FailedReason,
   Observer,
   ScheduledTask,
   ScheduledTaskExecutor,
   ScheduledTaskOutcome,
+  ScheduledTaskRunner,
   ScheduledTaskService,
   Statistics,
   TaskScheduler
@@ -20,7 +20,7 @@ import rozklad.utils.SafeConstruct
 
 import scala.concurrent.duration._
 
-class RoutineExecutorService[F[_]: Async](
+class RoutineScheduledTaskRunner[F[_]: Async](
     service: ScheduledTaskService[F],
     stoppedRef: Ref[F, Boolean],
     executor: ScheduledTaskExecutor[F],
@@ -29,8 +29,9 @@ class RoutineExecutorService[F[_]: Async](
     acquireBatchSize: Int,
     observer: Observer[F],
     sleepTime: FiniteDuration,
-    scheduler: TaskScheduler[F])
-    extends ExecutorService[F] {
+    scheduler: TaskScheduler[F],
+    executionTimeout: Option[FiniteDuration])
+    extends ScheduledTaskRunner[F] {
 
   val SC = implicitly[SafeConstruct[F]]
 
@@ -57,8 +58,18 @@ class RoutineExecutorService[F[_]: Async](
 
   private def executeTask(task: ScheduledTask) = {
     Temporal[F].realTimeInstant.flatMap { now =>
+      val execution = SC.construct(executor.execute(task))
+      val timedExecution = executionTimeout match {
+        case Some(timeout) =>
+          Temporal[F].timeoutTo(
+            execution,
+            timeout,
+            Async[F].raiseError(new java.util.concurrent.TimeoutException(
+              s"Task ${task.id} execution timed out after $timeout")))
+        case None => execution
+      }
       MonadCancel[F]
-        .guaranteeCase(SC.construct(executor.execute(task)).uncancelable) {
+        .guaranteeCase(timedExecution.uncancelable) {
           case Outcome.Succeeded(result) =>
             result.flatMap {
               case ScheduledTaskOutcome.Succeeded(payload) =>

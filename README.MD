@@ -1,51 +1,64 @@
 # Rozklad
 
-Rozklad(means schedule in Ukrainian) is persistent Postgresql based task-queue with delayed execution. Core capabilities:
-- schedule task to be executed in the future
-- executor that is reading from DB and executing all scheduled tasks (supports multi-node deployment, concurrency is handled by Postgresql)
+Rozklad (means "schedule" in Ukrainian) is a persistent PostgreSQL-based task queue with delayed execution.
+
+**Core capabilities:**
+- Schedule tasks to be executed in the future
+- Runner that reads from the DB and executes all scheduled tasks (supports multi-node deployment, concurrency is handled by PostgreSQL)
 
 ## Install
+
 ![version](https://jitpack.io/v/yarhrn/rozklad.svg)
 
 ```scala
 resolvers += "jitpack" at "https://jitpack.io"
-libraryDependencies += "com.github.yarhrn" % "rozklad" % "{take version from badge above}"	
+libraryDependencies += "com.github.yarhrn" % "rozklad" % "{take version from badge above}"
 ```
 
 ## Usage
+
 ### Scheduling
-To schedule a task instance of `TaskScheduler[F[_]]` is required. 
-To obtain instance of `TaskScheduler[F[_]]` you can provide `doobie.Transactor[F[_]]` to the `new DoobieTaskScheduler[F[_]](tx)`.
 
-Then you can schedule a task by calling `TaskScheduler.schedule`.
-`TaskScheduler.schedule` accepts:
-- `id` - task identifier, e.g. rozkald.api.Id.random
-- `triggerAt`: Instant - point in time after which task should be executed
-- `scheduledAt`: Instant - point in time when task is scheduled, e.g. Instant.now
-- `payload`: JsValue - some task specific data
+To schedule a task, an instance of `TaskScheduler[F[_]]` is required.
+To obtain one, provide a `doobie.Transactor[F[_]]` to `new DoobieTaskScheduler[F[_]](tx)`.
+
+Then schedule a task by calling `TaskScheduler.schedule`, which accepts:
+
+| Parameter     | Type      | Description                                              |
+|---------------|-----------|----------------------------------------------------------|
+| `id`          | `Id`      | Task identifier, e.g. `rozklad.api.Id.random`           |
+| `triggerAt`   | `Instant` | Point in time after which the task should be executed    |
+| `scheduledAt` | `Instant` | Point in time when the task is scheduled, e.g. `Instant.now` |
+| `payload`     | `JsValue` | Task-specific data                                       |
+
 ### Rescheduling
-To support different workflows starting from 1.0.0 added capability to "reschedule" tasks.
-Rescheduling is done via `TaskScheduler.schedule` method. 
-Rescheduling will occur in case there is scheduled task with the same id and status of task is one of `Created`, `Failed`, `Successful` or `Rescheduled`.
-To introspect history of task use `ScheduledTaskService.logs`. During rescheduling it is possible to update task's trigger at time and payload.
 
+Starting from 1.0.0, tasks can be rescheduled via the same `TaskScheduler.schedule` method.
+Rescheduling occurs when a task with the same `id` already exists and its status is one of `Created`, `Failed`, `Successful`, or `Rescheduled`.
+
+Use `ScheduledTaskService.logs` to introspect the history of a task.
+During rescheduling it is possible to update the task's `triggerAt` time and `payload`.
 
 ### Executing
-There are two ways how scheduled tasks can be executed.
 
-Low-level approach gives you full control on acquiring and committing task result. `ScheduledTaskService[F[_]]` (`DoobieScheduledTaskService
-`) allows you to:
-- `acquireBatch` - atomically and concurrently-safe acquire some number of tasks
-- `done` - mark task as successful
-- `failed` - mark task as failed
+There are two ways to execute scheduled tasks.
 
-To obtain instance of `ScheduledTaskService[F[_]]` you can provide `doobie.Transactor[F[_]]` to the `DoobieScheduledTaskService[F[_]]`.
+#### Low-level: `ScheduledTaskService`
 
+Gives you full control over acquiring and committing task results.
+`ScheduledTaskService[F[_]]` (implemented by `DoobieScheduledTaskService`) provides:
 
-ScheduledTask.status([enum](https://github.com/yarhrn/rozklad/blob/main/src/main/scala/api/ScheduledTask.scala#L29)) lifecycle diagram
+- `acquireBatch` — atomically and concurrently-safe acquire a batch of tasks
+- `done` — mark a task as successful
+- `failed` — mark a task as failed
+
+To obtain an instance, provide a `doobie.Transactor[F[_]]` to `DoobieScheduledTaskService[F[_]]`.
+
+**`ScheduledTask.status` lifecycle:**
+
 ```mermaid
 flowchart TD
-    initial --> created 
+    initial --> created
     created --> acquired
     acquired --> successful
     acquired --> failed
@@ -56,50 +69,56 @@ flowchart TD
     rescheduled --> acquired
 ```
 
-High-level approach is done via `rozklad.api.ExecutorService.start` that accepts 
-`rozklad.api.ScheduledTaskExecutor` - client provided way of how `ScheduledTask` should be executed.
-It is implemented as never ending fiber that constantly trying to acquire and execute tasks.
-Also, there is method `rozklad.api.ExecutorService.stop` for graceful shutdown.
+#### High-level: `ScheduledTaskRunner`
 
-### DB Scheme
-This library is tested with Postgresql and rely on Postgresql features like `select for update` and `skip locked`.
-Library requires proper Postgresql scheme setup:
+`ScheduledTaskRunner.start` accepts a `ScheduledTaskExecutor` — a client-provided handler for executing a `ScheduledTask`.
+It runs as a never-ending fiber that constantly acquires and executes tasks.
+Use `ScheduledTaskRunner.stop` for graceful shutdown.
+
+## DB Schema
+
+This library is tested with PostgreSQL and relies on PostgreSQL features like `SELECT FOR UPDATE` and `SKIP LOCKED`.
+
+The following schema is required:
+
 ```sql
-
-create table scheduled_tasks
-(
-    id char(36) primary key not null ,
-    scheduled_at timestamp with time zone not null ,
-    trigger_at timestamp with time zone not null ,
-    status smallint not null ,
-    updated_at timestamp with time zone not null ,
-    failed_reason smallint ,
-    payload jsonb not null
+CREATE TABLE scheduled_tasks (
+    id           CHAR(36) PRIMARY KEY NOT NULL,
+    scheduled_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    trigger_at   TIMESTAMP WITH TIME ZONE NOT NULL,
+    status       SMALLINT NOT NULL,
+    updated_at   TIMESTAMP WITH TIME ZONE NOT NULL,
+    failed_reason SMALLINT,
+    payload      JSONB NOT NULL
 );
 
-create table scheduled_tasks_change_log(
-    id char(36) primary key not null ,
-    task_id char(36) not null ,
-    status smallint not null ,
-    created_at timestamp with time zone not null ,
-    failed_reason smallint ,
-    payload jsonb not null ,
-    trigger_at timestamp with time zone not null
+CREATE TABLE scheduled_tasks_change_log (
+    id           CHAR(36) PRIMARY KEY NOT NULL,
+    task_id      CHAR(36) NOT NULL,
+    status       SMALLINT NOT NULL,
+    created_at   TIMESTAMP WITH TIME ZONE NOT NULL,
+    failed_reason SMALLINT,
+    payload      JSONB NOT NULL,
+    trigger_at   TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
-create index scheduled_tasks_status_trigger_at_index
-    on scheduled_tasks (status, trigger_at);
-```
-### Migration
-from 1.0.2 to 1.0.3
-```sql
-drop index if exists scheduled_tasks_change_log;
-create index scheduled_tasks_status_trigger_at_index
-    on scheduled_tasks (status, trigger_at);
+CREATE INDEX scheduled_tasks_status_trigger_at_index
+    ON scheduled_tasks (status, trigger_at);
 ```
 
-from 0.14 to 1.0.0
+## Migrations
+
+### 1.0.2 → 1.0.3
+
 ```sql
-alter table scheduled_tasks_change_log
-    add column trigger_at timestamp with time zone default null;
+DROP INDEX IF EXISTS scheduled_tasks_change_log;
+CREATE INDEX scheduled_tasks_status_trigger_at_index
+    ON scheduled_tasks (status, trigger_at);
+```
+
+### 0.14 → 1.0.0
+
+```sql
+ALTER TABLE scheduled_tasks_change_log
+    ADD COLUMN trigger_at TIMESTAMP WITH TIME ZONE DEFAULT NULL;
 ```

@@ -5,12 +5,12 @@ import cats.implicits._
 import cats.Monad
 import cats.effect.implicits._
 import play.api.libs.json.JsValue
-import rozklad.impl.RoutineExecutorService
+import rozklad.impl.RoutineScheduledTaskRunner
 
 import java.time.Instant
 import scala.concurrent.duration.FiniteDuration
 
-trait ExecutorService[F[_]] {
+trait ScheduledTaskRunner[F[_]] {
   def stop: F[Unit]
 
   def statistics: F[Statistics]
@@ -66,19 +66,20 @@ case class Statistics(processed: Int, stopped: Boolean, lastAcquireAttemptAt: Op
   def inc: Statistics = copy(processed = processed + 1)
 }
 
-object ExecutorService {
+object ScheduledTaskRunner {
   def start[F[_]: Async](
       service: ScheduledTaskService[F],
       routine: ScheduledTaskExecutor[F],
       observer: Observer[F],
       sleepTime: FiniteDuration,
-      scheduler: TaskScheduler[F]): F[RoutineExecutorService[F]] = {
+      scheduler: TaskScheduler[F],
+      executionTimeout: Option[FiniteDuration] = None): F[ScheduledTaskRunner[F]] = {
     for {
       now <- Temporal[F].realTimeInstant
       stopSignal <- Ref.of(false)
       streamEndDeferred <- Deferred.apply[F, Unit]
       statisticsRef <- Ref.of[F, Statistics](Statistics(0, stopped = false, None, now))
-      executorService = new RoutineExecutorService[F](
+      runner = new RoutineScheduledTaskRunner[F](
         service,
         stopSignal,
         routine,
@@ -87,8 +88,9 @@ object ExecutorService {
         10,
         observer,
         sleepTime,
-        scheduler)
-      _ <- executorService.unsafeRoutine.start
-    } yield executorService
+        scheduler,
+        executionTimeout)
+      _ <- runner.unsafeRoutine.start
+    } yield runner
   }
 }
