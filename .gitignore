@@ -120,4 +120,6 @@ project/plugins/project/
 hs_err_pid*
 .DS_STORE
 .metals/
+.bloop/
+project/.bloop/
 # End of https://www.toptal.com/developers/gitignore/api/scala,sbt,intellij+all
