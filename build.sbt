@@ -16,13 +16,13 @@ scalaVersion := "3.3.7"
 scalacOptions += "-Yretain-trees"
 
 libraryDependencies += "org.playframework" %% "play-json" % "3.0.6"
-libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC9"
-libraryDependencies += "com.beachape" %% "enumeratum" % "1.7.5"
+libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC12"
+libraryDependencies += "com.beachape" %% "enumeratum" % "1.9.7"
 
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.44.1" % Test
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
-libraryDependencies += "org.scalamock" %% "scalamock" % "6.0.0" % Test
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.11" % Test
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.20" % Test
+libraryDependencies += "org.scalamock" %% "scalamock" % "7.5.5" % Test
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.5.32" % Test
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies, // : ReleaseStep

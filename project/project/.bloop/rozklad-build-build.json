@@ -16,93 +16,93 @@
             
         ],
         "classpath": [
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.10.11/sbt-1.10.11.jar",
-            "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-library.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.12.11/sbt-1.12.11.jar",
+            "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-library.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/2.0.17/sbt-bloop_2.12_1.0-2.0.17.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.10.11/main_2.12-1.10.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.12.11/main_2.12-1.12.11.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/io_2.12/1.10.5/io_2.12-1.10.5.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/bloop-config_2.12/2.3.3/bloop-config_2.12-2.3.3.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.10.11/logic_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.10.11/actions_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.10.11/main-settings_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/run_2.12/1.10.11/run_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/command_2.12/1.10.11/command_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.10.11/collections_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.10.11/scripted-plugin_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.10.11/zinc-lm-integration_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-logging_2.12/1.10.11/util-logging_2.12-1.10.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.12.11/logic_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.12.11/actions_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.12.11/main-settings_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/run_2.12/1.12.11/run_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/command_2.12/1.12.11/command_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.12.11/collections_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.12.11/scripted-plugin_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.12.11/zinc-lm-integration_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-logging_2.12/1.12.11/util-logging_2.12-1.12.11.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/2.3.0/scala-xml_2.12-2.3.0.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.4.4/launcher-interface-1.4.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.6.1/launcher-interface-1.6.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/ben-manes/caffeine/caffeine/2.8.5/caffeine-2.8.5.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/get-coursier/lm-coursier-shaded_2.12/2.1.8/lm-coursier-shaded_2.12-2.1.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.1/log4j-api-2.17.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.1/log4j-core-2.17.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.17.1/log4j-slf4j-impl-2.17.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-core_2.12/1.10.4/librarymanagement-core_2.12-1.10.4.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-ivy_2.12/1.10.4/librarymanagement-ivy_2.12-1.10.4.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.10.8/compiler-interface-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile_2.12/1.10.8/zinc-compile_2.12-1.10.8.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/get-coursier/lm-coursier-shaded_2.12/2.1.13/lm-coursier-shaded_2.12-2.1.13.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.25.4/log4j-api-2.25.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.25.4/log4j-core-2.25.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.25.4/log4j-slf4j-impl-2.25.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-core_2.12/1.12.2/librarymanagement-core_2.12-1.12.2.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-ivy_2.12/1.12.2/librarymanagement-ivy_2.12-1.12.2.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.12.0/compiler-interface-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile_2.12/1.12.0/zinc-compile_2.12-1.12.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/swoval/file-tree-views/2.1.12/file-tree-views-2.1.12.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.13.5.2/jsoniter-scala-core_2.12-2.13.5.2.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/unroll-annotation_2.12/0.1.12/unroll-annotation_2.12-0.1.12.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.10.11/util-relation_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.10.11/completion_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.10.11/task-system_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/tasks_2.12/1.10.11/tasks_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/testing_2.12/1.10.11/testing_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.10.11/util-tracking_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-scalajson_2.12/0.10.1/sjson-new-scalajson_2.12-0.10.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-terminal/3.27.1/jline-terminal-3.27.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.10.8/zinc-classpath_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.10.8/zinc-apiinfo_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc_2.12/1.10.8/zinc_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/core-macros_2.12/1.10.11/core-macros_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-cache_2.12/1.10.11/util-cache_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-control_2.12/1.10.11/util-control_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.10.11/protocol_2.12-1.10.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.12.11/util-relation_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.12.11/completion_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.12.11/task-system_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/tasks_2.12/1.12.11/tasks_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/testing_2.12/1.12.11/testing_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.12.11/util-tracking_2.12-1.12.11.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-core_2.12/0.10.1/sjson-new-core_2.12-0.10.1.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-scalajson_2.12/0.10.1/sjson-new-scalajson_2.12-0.10.1.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-apache-http_2.12/0.9.4/gigahorse-apache-http_2.12-0.9.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-terminal/3.27.1/jline-terminal-3.27.1.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.12.0/zinc-classpath_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.12.0/zinc-apiinfo_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc_2.12/1.12.0/zinc_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/core-macros_2.12/1.12.11/core-macros_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-cache_2.12/1.12.11/util-cache_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-control_2.12/1.12.11/util-control_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.12.11/protocol_2.12-1.12.11.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/template-resolver/0.1/template-resolver-0.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.10.11/util-position_2.12-1.10.11.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.10.8/zinc-compile-core_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.11/util-interface-1.10.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.12.11/util-position_2.12-1.12.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.12.0/zinc-compile-core_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.12.11/util-interface-1.12.11.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/jline/jline/2.14.7-sbt-9a88bc413e2b34a4580c001c654d1a7f4f65bf18/jline-2.14.7-sbt-9a88bc413e2b34a4580c001c654d1a7f4f65bf18.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-terminal-jni/3.27.1/jline-terminal-jni-3.27.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-native/3.27.1/jline-native-3.27.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lmax/disruptor/3.4.2/disruptor-3.4.2.jar",
-            "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-reflect.jar",
+            "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-reflect.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-qual/3.4.1/checker-qual-3.4.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.4.0/error_prone_annotations-2.4.0.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.13.0/scala-collection-compat_2.12-2.13.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.14.0/scala-collection-compat_2.12-2.14.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
-            "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-compiler.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/mwiede/jsch/0.2.23/jsch-0.2.23.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-apache-http_2.12/0.7.0/gigahorse-apache-http_2.12-0.7.0.jar",
+            "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-compiler.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/mwiede/jsch/2.27.5/jsch-2.27.5.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-77cc781d727b367d3761f097d89f5a4762771d41/ivy-2.3.0-sbt-77cc781d727b367d3761f097d89f5a4762771d41.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-reader/3.27.1/jline-reader-3.27.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-builtins/3.27.1/jline-builtins-3.27.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.10.11/test-agent-1.10.11.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.12.11/test-agent-1.12.11.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-scalajson_2.12/1.0.0-M4/shaded-scalajson_2.12-1.0.0-M4.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-jawn-parser_2.12/1.3.2/shaded-jawn-parser_2.12-1.3.2.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.10.8/compiler-bridge_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classfile_2.12/1.10.8/zinc-classfile_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-core_2.12/1.10.8/zinc-core_2.12-1.10.8.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist_2.12/1.10.8/zinc-persist_2.12-1.10.8.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.9.4/gigahorse-core_2.12-0.9.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-apache-httpclient5/0.9.4/shaded-apache-httpclient5-0.9.4.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.12.0/compiler-bridge_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classfile_2.12/1.12.0/zinc-classfile_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-core_2.12/1.12.0/zinc-core_2.12-1.12.0.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist_2.12/1.12.0/zinc-persist_2.12-1.12.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-murmurhash_2.12/0.10.1/sjson-new-murmurhash_2.12-0.10.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/ipcsocket/ipcsocket/1.6.3/ipcsocket-1.6.3.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/openhft/zero-allocation-hashing/0.16/zero-allocation-hashing-0.16.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/fusesource/jansi/jansi/2.4.1/jansi-2.4.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.7.0/gigahorse-core_2.12-0.7.0.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-apache-httpasyncclient/0.7.0/shaded-apache-httpasyncclient-0.7.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jline/jline-style/3.27.1/jline-style-3.27.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.10.8/zinc-persist-core-assembly-1.10.8.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.7.1/ssl-config-core_2.12-0.7.1.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar",
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.12.0/zinc-persist-core-assembly-1.12.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbinary_2.12/0.5.1/sbinary_2.12-0.5.1.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.12.0/jna-5.12.0.jar",
             "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna-platform/5.12.0/jna-platform-5.12.0.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.6.1/ssl-config-core_2.12-0.6.1.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar",
-            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.2/config-1.4.2.jar"
+            "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.5/config-1.4.5.jar"
         ],
         "out": "/Users/yaroslavhryniuk/oss/rozklad/project/project/.bloop/rozklad-build-build",
         "classesDir": "/Users/yaroslavhryniuk/oss/rozklad/project/project/.bloop/rozklad-build-build/scala-2.12/sbt-1.0/classes",
@@ -113,7 +113,7 @@
         "scala": {
             "organization": "org.scala-lang",
             "name": "scala-compiler",
-            "version": "2.12.20",
+            "version": "2.12.21",
             "options": [
                 "-deprecation",
                 "-Wconf:cat=unused-nowarn:s",
@@ -122,10 +122,10 @@
                 "-Xsource:3"
             ],
             "jars": [
-                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-library.jar",
-                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-compiler.jar",
-                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-reflect.jar",
-                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-xml_2.12-2.3.0.jar"
+                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-library.jar",
+                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-compiler.jar",
+                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-reflect.jar",
+                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-xml_2.12-2.3.0.jar"
             ],
             "setup": {
                 "order": "mixed",
@@ -142,7 +142,7 @@
             ]
         },
         "sbt": {
-            "sbtVersion": "1.10.11",
+            "sbtVersion": "1.12.11",
             "autoImports": [
                 "import _root_.scala.xml.{TopScope=>$scope}",
                 "import _root_.sbt._",
@@ -214,7 +214,7 @@
         "platform": {
             "name": "jvm",
             "config": {
-                "home": "/Users/yaroslavhryniuk/.sdkman/candidates/java/21.0.6-tem",
+                "home": "/Users/yaroslavhryniuk/.sdkman/candidates/java/11.0.18-librca",
                 "options": [
                     "-Duser.dir=/Users/yaroslavhryniuk/oss/rozklad/project/project"
                 ]
@@ -223,7 +223,7 @@
                 
             ],
             "runtimeConfig": {
-                "home": "/Users/yaroslavhryniuk/.sdkman/candidates/java/21.0.6-tem",
+                "home": "/Users/yaroslavhryniuk/.sdkman/candidates/java/11.0.18-librca",
                 "options": [
                     "-Duser.dir=/Users/yaroslavhryniuk/oss/rozklad/project/project"
                 ]
@@ -234,7 +234,7 @@
                 "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/bloop-config_2.12/2.3.3/bloop-config_2.12-2.3.3.jar",
                 "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.13.5.2/jsoniter-scala-core_2.12-2.13.5.2.jar",
                 "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/unroll-annotation_2.12/0.1.12/unroll-annotation_2.12-0.1.12.jar",
-                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-library.jar"
+                "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-library.jar"
             ]
         },
         "resolution": {
@@ -310,51 +310,51 @@
                 {
                     "organization": "org.scala-lang",
                     "name": "scala-library",
-                    "version": "2.12.20",
+                    "version": "2.12.21",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "scala-library",
-                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-library.jar"
+                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-library.jar"
                         },
                         {
                             "name": "scala-library",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.20/scala-library-2.12.20-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.21/scala-library-2.12.21-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "sbt",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "sbt",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.10.11/sbt-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.12.11/sbt-1.12.11.jar"
                         },
                         {
                             "name": "sbt",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.10.11/sbt-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.12.11/sbt-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "main_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "main_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.10.11/main_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.12.11/main_2.12-1.12.11.jar"
                         },
                         {
                             "name": "main_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.10.11/main_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.12.11/main_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
@@ -378,153 +378,153 @@
                 {
                     "organization": "org.scala-sbt",
                     "name": "logic_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "logic_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.10.11/logic_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.12.11/logic_2.12-1.12.11.jar"
                         },
                         {
                             "name": "logic_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.10.11/logic_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/logic_2.12/1.12.11/logic_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "actions_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "actions_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.10.11/actions_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.12.11/actions_2.12-1.12.11.jar"
                         },
                         {
                             "name": "actions_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.10.11/actions_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.12.11/actions_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "main-settings_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "main-settings_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.10.11/main-settings_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.12.11/main-settings_2.12-1.12.11.jar"
                         },
                         {
                             "name": "main-settings_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.10.11/main-settings_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.12.11/main-settings_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "run_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "run_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/run_2.12/1.10.11/run_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/run_2.12/1.12.11/run_2.12-1.12.11.jar"
                         },
                         {
                             "name": "run_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/run_2.12/1.10.11/run_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/run_2.12/1.12.11/run_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "command_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "command_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/command_2.12/1.10.11/command_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/command_2.12/1.12.11/command_2.12-1.12.11.jar"
                         },
                         {
                             "name": "command_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/command_2.12/1.10.11/command_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/command_2.12/1.12.11/command_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "collections_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "collections_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.10.11/collections_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.12.11/collections_2.12-1.12.11.jar"
                         },
                         {
                             "name": "collections_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.10.11/collections_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.12.11/collections_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "scripted-plugin_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "scripted-plugin_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.10.11/scripted-plugin_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.12.11/scripted-plugin_2.12-1.12.11.jar"
                         },
                         {
                             "name": "scripted-plugin_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.10.11/scripted-plugin_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.12.11/scripted-plugin_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-lm-integration_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-lm-integration_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.10.11/zinc-lm-integration_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.12.11/zinc-lm-integration_2.12-1.12.11.jar"
                         },
                         {
                             "name": "zinc-lm-integration_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.10.11/zinc-lm-integration_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.12.11/zinc-lm-integration_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-logging_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-logging_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-logging_2.12/1.10.11/util-logging_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-logging_2.12/1.12.11/util-logging_2.12-1.12.11.jar"
                         },
                         {
                             "name": "util-logging_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-logging_2.12/1.10.11/util-logging_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-logging_2.12/1.12.11/util-logging_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
@@ -548,17 +548,17 @@
                 {
                     "organization": "org.scala-sbt",
                     "name": "launcher-interface",
-                    "version": "1.4.4",
+                    "version": "1.6.1",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "launcher-interface",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.4.4/launcher-interface-1.4.4.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.6.1/launcher-interface-1.6.1.jar"
                         },
                         {
                             "name": "launcher-interface",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.4.4/launcher-interface-1.4.4-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.6.1/launcher-interface-1.6.1-sources.jar"
                         }
                     ]
                 },
@@ -582,136 +582,136 @@
                 {
                     "organization": "io.get-coursier",
                     "name": "lm-coursier-shaded_2.12",
-                    "version": "2.1.8",
+                    "version": "2.1.13",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "lm-coursier-shaded_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/get-coursier/lm-coursier-shaded_2.12/2.1.8/lm-coursier-shaded_2.12-2.1.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/get-coursier/lm-coursier-shaded_2.12/2.1.13/lm-coursier-shaded_2.12-2.1.13.jar"
                         },
                         {
                             "name": "lm-coursier-shaded_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/get-coursier/lm-coursier-shaded_2.12/2.1.8/lm-coursier-shaded_2.12-2.1.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/get-coursier/lm-coursier-shaded_2.12/2.1.13/lm-coursier-shaded_2.12-2.1.13-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.apache.logging.log4j",
                     "name": "log4j-api",
-                    "version": "2.17.1",
+                    "version": "2.25.4",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "log4j-api",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.1/log4j-api-2.17.1.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.25.4/log4j-api-2.25.4.jar"
                         },
                         {
                             "name": "log4j-api",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.17.1/log4j-api-2.17.1-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.25.4/log4j-api-2.25.4-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.apache.logging.log4j",
                     "name": "log4j-core",
-                    "version": "2.17.1",
+                    "version": "2.25.4",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "log4j-core",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.1/log4j-core-2.17.1.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.25.4/log4j-core-2.25.4.jar"
                         },
                         {
                             "name": "log4j-core",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.17.1/log4j-core-2.17.1-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.25.4/log4j-core-2.25.4-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.apache.logging.log4j",
                     "name": "log4j-slf4j-impl",
-                    "version": "2.17.1",
+                    "version": "2.25.4",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "log4j-slf4j-impl",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.17.1/log4j-slf4j-impl-2.17.1.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.25.4/log4j-slf4j-impl-2.25.4.jar"
                         },
                         {
                             "name": "log4j-slf4j-impl",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.17.1/log4j-slf4j-impl-2.17.1-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.25.4/log4j-slf4j-impl-2.25.4-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "librarymanagement-core_2.12",
-                    "version": "1.10.4",
+                    "version": "1.12.2",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "librarymanagement-core_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-core_2.12/1.10.4/librarymanagement-core_2.12-1.10.4.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-core_2.12/1.12.2/librarymanagement-core_2.12-1.12.2.jar"
                         },
                         {
                             "name": "librarymanagement-core_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-core_2.12/1.10.4/librarymanagement-core_2.12-1.10.4-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-core_2.12/1.12.2/librarymanagement-core_2.12-1.12.2-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "librarymanagement-ivy_2.12",
-                    "version": "1.10.4",
+                    "version": "1.12.2",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "librarymanagement-ivy_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-ivy_2.12/1.10.4/librarymanagement-ivy_2.12-1.10.4.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-ivy_2.12/1.12.2/librarymanagement-ivy_2.12-1.12.2.jar"
                         },
                         {
                             "name": "librarymanagement-ivy_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-ivy_2.12/1.10.4/librarymanagement-ivy_2.12-1.10.4-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/librarymanagement-ivy_2.12/1.12.2/librarymanagement-ivy_2.12-1.12.2-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "compiler-interface",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "compiler-interface",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.10.8/compiler-interface-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.12.0/compiler-interface-1.12.0.jar"
                         },
                         {
                             "name": "compiler-interface",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.10.8/compiler-interface-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.12.0/compiler-interface-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-compile_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-compile_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile_2.12/1.10.8/zinc-compile_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile_2.12/1.12.0/zinc-compile_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-compile_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile_2.12/1.10.8/zinc-compile_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile_2.12/1.12.0/zinc-compile_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
@@ -735,102 +735,119 @@
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-relation_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-relation_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.10.11/util-relation_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.12.11/util-relation_2.12-1.12.11.jar"
                         },
                         {
                             "name": "util-relation_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.10.11/util-relation_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-relation_2.12/1.12.11/util-relation_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "completion_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "completion_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.10.11/completion_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.12.11/completion_2.12-1.12.11.jar"
                         },
                         {
                             "name": "completion_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.10.11/completion_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.12.11/completion_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "task-system_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "task-system_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.10.11/task-system_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.12.11/task-system_2.12-1.12.11.jar"
                         },
                         {
                             "name": "task-system_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.10.11/task-system_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/task-system_2.12/1.12.11/task-system_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "tasks_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "tasks_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/tasks_2.12/1.10.11/tasks_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/tasks_2.12/1.12.11/tasks_2.12-1.12.11.jar"
                         },
                         {
                             "name": "tasks_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/tasks_2.12/1.10.11/tasks_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/tasks_2.12/1.12.11/tasks_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "testing_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "testing_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/testing_2.12/1.10.11/testing_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/testing_2.12/1.12.11/testing_2.12-1.12.11.jar"
                         },
                         {
                             "name": "testing_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/testing_2.12/1.10.11/testing_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/testing_2.12/1.12.11/testing_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-tracking_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-tracking_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.10.11/util-tracking_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.12.11/util-tracking_2.12-1.12.11.jar"
                         },
                         {
                             "name": "util-tracking_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.10.11/util-tracking_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.12.11/util-tracking_2.12-1.12.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eed3si9n",
+                    "name": "sjson-new-core_2.12",
+                    "version": "0.10.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "sjson-new-core_2.12",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-core_2.12/0.10.1/sjson-new-core_2.12-0.10.1.jar"
+                        },
+                        {
+                            "name": "sjson-new-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-core_2.12/0.10.1/sjson-new-core_2.12-0.10.1-sources.jar"
                         }
                     ]
                 },
@@ -848,6 +865,23 @@
                             "name": "sjson-new-scalajson_2.12",
                             "classifier": "sources",
                             "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-scalajson_2.12/0.10.1/sjson-new-scalajson_2.12-0.10.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eed3si9n",
+                    "name": "gigahorse-apache-http_2.12",
+                    "version": "0.9.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gigahorse-apache-http_2.12",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-apache-http_2.12/0.9.4/gigahorse-apache-http_2.12-0.9.4.jar"
+                        },
+                        {
+                            "name": "gigahorse-apache-http_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-apache-http_2.12/0.9.4/gigahorse-apache-http_2.12-0.9.4-sources.jar"
                         }
                     ]
                 },
@@ -871,136 +905,119 @@
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-classpath_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-classpath_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.10.8/zinc-classpath_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.12.0/zinc-classpath_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-classpath_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.10.8/zinc-classpath_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.12.0/zinc-classpath_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-apiinfo_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-apiinfo_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.10.8/zinc-apiinfo_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.12.0/zinc-apiinfo_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-apiinfo_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.10.8/zinc-apiinfo_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.12.0/zinc-apiinfo_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc_2.12/1.10.8/zinc_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc_2.12/1.12.0/zinc_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc_2.12/1.10.8/zinc_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc_2.12/1.12.0/zinc_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "core-macros_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "core-macros_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/core-macros_2.12/1.10.11/core-macros_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/core-macros_2.12/1.12.11/core-macros_2.12-1.12.11.jar"
                         },
                         {
                             "name": "core-macros_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/core-macros_2.12/1.10.11/core-macros_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/core-macros_2.12/1.12.11/core-macros_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-cache_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-cache_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-cache_2.12/1.10.11/util-cache_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-cache_2.12/1.12.11/util-cache_2.12-1.12.11.jar"
                         },
                         {
                             "name": "util-cache_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-cache_2.12/1.10.11/util-cache_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-cache_2.12/1.12.11/util-cache_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-control_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-control_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-control_2.12/1.10.11/util-control_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-control_2.12/1.12.11/util-control_2.12-1.12.11.jar"
                         },
                         {
                             "name": "util-control_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-control_2.12/1.10.11/util-control_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-control_2.12/1.12.11/util-control_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "protocol_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "protocol_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.10.11/protocol_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.12.11/protocol_2.12-1.12.11.jar"
                         },
                         {
                             "name": "protocol_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.10.11/protocol_2.12-1.10.11-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "com.eed3si9n",
-                    "name": "sjson-new-core_2.12",
-                    "version": "0.10.1",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "sjson-new-core_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-core_2.12/0.10.1/sjson-new-core_2.12-0.10.1.jar"
-                        },
-                        {
-                            "name": "sjson-new-core_2.12",
-                            "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-core_2.12/0.10.1/sjson-new-core_2.12-0.10.1-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.12.11/protocol_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
@@ -1024,51 +1041,51 @@
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-position_2.12",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-position_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.10.11/util-position_2.12-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.12.11/util-position_2.12-1.12.11.jar"
                         },
                         {
                             "name": "util-position_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.10.11/util-position_2.12-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.12.11/util-position_2.12-1.12.11-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-compile-core_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-compile-core_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.10.8/zinc-compile-core_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.12.0/zinc-compile-core_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-compile-core_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.10.8/zinc-compile-core_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.12.0/zinc-compile-core_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "util-interface",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "util-interface",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.11/util-interface-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.12.11/util-interface-1.12.11.jar"
                         },
                         {
                             "name": "util-interface",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.10.11/util-interface-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.12.11/util-interface-1.12.11-sources.jar"
                         }
                     ]
                 },
@@ -1143,17 +1160,17 @@
                 {
                     "organization": "org.scala-lang",
                     "name": "scala-reflect",
-                    "version": "2.12.20",
+                    "version": "2.12.21",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "scala-reflect",
-                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-reflect.jar"
+                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-reflect.jar"
                         },
                         {
                             "name": "scala-reflect",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.20/scala-reflect-2.12.20-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.21/scala-reflect-2.12.21-sources.jar"
                         }
                     ]
                 },
@@ -1194,17 +1211,17 @@
                 {
                     "organization": "org.scala-lang.modules",
                     "name": "scala-collection-compat_2.12",
-                    "version": "2.13.0",
+                    "version": "2.14.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "scala-collection-compat_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.13.0/scala-collection-compat_2.12-2.13.0.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.14.0/scala-collection-compat_2.12-2.14.0.jar"
                         },
                         {
                             "name": "scala-collection-compat_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.13.0/scala-collection-compat_2.12-2.13.0-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.14.0/scala-collection-compat_2.12-2.14.0-sources.jar"
                         }
                     ]
                 },
@@ -1228,51 +1245,34 @@
                 {
                     "organization": "org.scala-lang",
                     "name": "scala-compiler",
-                    "version": "2.12.20",
+                    "version": "2.12.21",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "scala-compiler",
-                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-compiler.jar"
+                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-compiler.jar"
                         },
                         {
                             "name": "scala-compiler",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.20/scala-compiler-2.12.20-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.21/scala-compiler-2.12.21-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "com.github.mwiede",
                     "name": "jsch",
-                    "version": "0.2.23",
+                    "version": "2.27.5",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "jsch",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/mwiede/jsch/0.2.23/jsch-0.2.23.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/mwiede/jsch/2.27.5/jsch-2.27.5.jar"
                         },
                         {
                             "name": "jsch",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/mwiede/jsch/0.2.23/jsch-0.2.23-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "com.eed3si9n",
-                    "name": "gigahorse-apache-http_2.12",
-                    "version": "0.7.0",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "gigahorse-apache-http_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-apache-http_2.12/0.7.0/gigahorse-apache-http_2.12-0.7.0.jar"
-                        },
-                        {
-                            "name": "gigahorse-apache-http_2.12",
-                            "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-apache-http_2.12/0.7.0/gigahorse-apache-http_2.12-0.7.0-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/mwiede/jsch/2.27.5/jsch-2.27.5-sources.jar"
                         }
                     ]
                 },
@@ -1330,17 +1330,17 @@
                 {
                     "organization": "org.scala-sbt",
                     "name": "test-agent",
-                    "version": "1.10.11",
+                    "version": "1.12.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "test-agent",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.10.11/test-agent-1.10.11.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.12.11/test-agent-1.12.11.jar"
                         },
                         {
                             "name": "test-agent",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.10.11/test-agent-1.10.11-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-agent/1.12.11/test-agent-1.12.11-sources.jar"
                         }
                     ]
                 },
@@ -1396,70 +1396,104 @@
                     ]
                 },
                 {
+                    "organization": "com.eed3si9n",
+                    "name": "gigahorse-core_2.12",
+                    "version": "0.9.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gigahorse-core_2.12",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.9.4/gigahorse-core_2.12-0.9.4.jar"
+                        },
+                        {
+                            "name": "gigahorse-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.9.4/gigahorse-core_2.12-0.9.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eed3si9n",
+                    "name": "shaded-apache-httpclient5",
+                    "version": "0.9.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "shaded-apache-httpclient5",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-apache-httpclient5/0.9.4/shaded-apache-httpclient5-0.9.4.jar"
+                        },
+                        {
+                            "name": "shaded-apache-httpclient5",
+                            "classifier": "sources",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-apache-httpclient5/0.9.4/shaded-apache-httpclient5-0.9.4-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "org.scala-sbt",
                     "name": "compiler-bridge_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "compiler-bridge_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.10.8/compiler-bridge_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.12.0/compiler-bridge_2.12-1.12.0.jar"
                         },
                         {
                             "name": "compiler-bridge_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.10.8/compiler-bridge_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.12.0/compiler-bridge_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-classfile_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-classfile_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classfile_2.12/1.10.8/zinc-classfile_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classfile_2.12/1.12.0/zinc-classfile_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-classfile_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classfile_2.12/1.10.8/zinc-classfile_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classfile_2.12/1.12.0/zinc-classfile_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-core_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-core_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-core_2.12/1.10.8/zinc-core_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-core_2.12/1.12.0/zinc-core_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-core_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-core_2.12/1.10.8/zinc-core_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-core_2.12/1.12.0/zinc-core_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-sbt",
                     "name": "zinc-persist_2.12",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-persist_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist_2.12/1.10.8/zinc-persist_2.12-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist_2.12/1.12.0/zinc-persist_2.12-1.12.0.jar"
                         },
                         {
                             "name": "zinc-persist_2.12",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist_2.12/1.10.8/zinc-persist_2.12-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist_2.12/1.12.0/zinc-persist_2.12-1.12.0-sources.jar"
                         }
                     ]
                 },
@@ -1549,40 +1583,6 @@
                     ]
                 },
                 {
-                    "organization": "com.eed3si9n",
-                    "name": "gigahorse-core_2.12",
-                    "version": "0.7.0",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "gigahorse-core_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.7.0/gigahorse-core_2.12-0.7.0.jar"
-                        },
-                        {
-                            "name": "gigahorse-core_2.12",
-                            "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.7.0/gigahorse-core_2.12-0.7.0-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "com.eed3si9n",
-                    "name": "shaded-apache-httpasyncclient",
-                    "version": "0.7.0",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "shaded-apache-httpasyncclient",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-apache-httpasyncclient/0.7.0/shaded-apache-httpasyncclient-0.7.0.jar"
-                        },
-                        {
-                            "name": "shaded-apache-httpasyncclient",
-                            "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-apache-httpasyncclient/0.7.0/shaded-apache-httpasyncclient-0.7.0-sources.jar"
-                        }
-                    ]
-                },
-                {
                     "organization": "org.jline",
                     "name": "jline-style",
                     "version": "3.27.1",
@@ -1600,19 +1600,53 @@
                     ]
                 },
                 {
+                    "organization": "com.typesafe",
+                    "name": "ssl-config-core_2.12",
+                    "version": "0.7.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "ssl-config-core_2.12",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.7.1/ssl-config-core_2.12-0.7.1.jar"
+                        },
+                        {
+                            "name": "ssl-config-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.7.1/ssl-config-core_2.12-0.7.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.reactivestreams",
+                    "name": "reactive-streams",
+                    "version": "1.0.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "reactive-streams",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar"
+                        },
+                        {
+                            "name": "reactive-streams",
+                            "classifier": "sources",
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "org.scala-sbt",
                     "name": "zinc-persist-core-assembly",
-                    "version": "1.10.8",
+                    "version": "1.12.0",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "zinc-persist-core-assembly",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.10.8/zinc-persist-core-assembly-1.10.8.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.12.0/zinc-persist-core-assembly-1.12.0.jar"
                         },
                         {
                             "name": "zinc-persist-core-assembly",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.10.8/zinc-persist-core-assembly-1.10.8-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-persist-core-assembly/1.12.0/zinc-persist-core-assembly-1.12.0-sources.jar"
                         }
                     ]
                 },
@@ -1669,86 +1703,52 @@
                 },
                 {
                     "organization": "com.typesafe",
-                    "name": "ssl-config-core_2.12",
-                    "version": "0.6.1",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "ssl-config-core_2.12",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.6.1/ssl-config-core_2.12-0.6.1.jar"
-                        },
-                        {
-                            "name": "ssl-config-core_2.12",
-                            "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.6.1/ssl-config-core_2.12-0.6.1-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "org.reactivestreams",
-                    "name": "reactive-streams",
-                    "version": "1.0.3",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "reactive-streams",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar"
-                        },
-                        {
-                            "name": "reactive-streams",
-                            "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "com.typesafe",
                     "name": "config",
-                    "version": "1.4.2",
+                    "version": "1.4.5",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "config",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.2/config-1.4.2.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.5/config-1.4.5.jar"
                         },
                         {
                             "name": "config",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.2/config-1.4.2-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.5/config-1.4.5-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-lang",
                     "name": "scala-compiler",
-                    "version": "2.12.20",
+                    "version": "2.12.21",
                     "configurations": "optional",
                     "artifacts": [
                         {
                             "name": "scala-compiler",
-                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-compiler.jar"
+                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-compiler.jar"
                         },
                         {
                             "name": "scala-compiler",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.20/scala-compiler-2.12.20-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.12.21/scala-compiler-2.12.21-sources.jar"
                         }
                     ]
                 },
                 {
                     "organization": "org.scala-lang",
                     "name": "scala-library",
-                    "version": "2.12.20",
+                    "version": "2.12.21",
                     "configurations": "optional",
                     "artifacts": [
                         {
                             "name": "scala-library",
-                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.20/lib/scala-library.jar"
+                            "path": "/Users/yaroslavhryniuk/.sbt/boot/scala-2.12.21/lib/scala-library.jar"
                         },
                         {
                             "name": "scala-library",
                             "classifier": "sources",
-                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.20/scala-library-2.12.20-sources.jar"
+                            "path": "/Users/yaroslavhryniuk/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.21/scala-library-2.12.21-sources.jar"
                         }
                     ]
                 }
