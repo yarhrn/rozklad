@@ -16,7 +16,7 @@ scalaVersion := "3.3.7"
 scalacOptions += "-Yretain-trees"
 
 libraryDependencies += "org.playframework" %% "play-json" % "3.0.6"
-libraryDependencies += "org.tpolecat" %% "doobie-postgres" % "1.0.0-RC12"
+libraryDependencies += "org.typelevel" %% "doobie-postgres" % "1.0.0-RC13"
 libraryDependencies += "com.beachape" %% "enumeratum" % "1.9.7"
 
 libraryDependencies += "com.dimafeng" %% "testcontainers-scala-postgresql" % "0.44.1" % Test
