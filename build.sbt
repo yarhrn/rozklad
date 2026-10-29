@@ -11,7 +11,7 @@ developers := List(Developer("Yaroslav Hryniuk", "Yaroslav Hryniuk", "yaroslavh.
 licenses += ("MIT", url("https://github.com/yarhrn/rozklad/blob/master/LICENSE"))
 publishMavenStyle := true
 releaseTagName := s"${if (releaseUseGlobalVersion.value) (ThisBuild / version).value else version.value}"
-scalaVersion := "3.3.7"
+scalaVersion := "3.3.9"
 
 scalacOptions += "-Yretain-trees"
 
