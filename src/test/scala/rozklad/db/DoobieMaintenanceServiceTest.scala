@@ -1,7 +1,7 @@
 package rozklad.db
 
 import cats.effect.IO
-import doobie.util.transactor.Transactor
+import org.typelevel.doobie.util.transactor.Transactor
 import org.scalatest.flatspec.AnyFlatSpec
 import rozklad.api.ScheduledTaskLog
 import rozklad.test.EmbeddedPosrtesqlDBEnv

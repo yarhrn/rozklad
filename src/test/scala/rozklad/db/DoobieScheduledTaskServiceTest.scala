@@ -1,7 +1,7 @@
 package rozklad.db
 
 import cats.effect.IO
-import doobie.Transactor
+import org.typelevel.doobie.Transactor
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers._
 import play.api.libs.json.Json

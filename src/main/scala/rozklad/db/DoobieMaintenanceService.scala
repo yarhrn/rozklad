@@ -1,9 +1,9 @@
 package rozklad.db
 
 import cats.effect.kernel.MonadCancel
-import doobie.util.transactor.Transactor
+import org.typelevel.doobie.util.transactor.Transactor
 import rozklad.api.{Id, MaintenanceService, RemovedScheduledTask, ScheduledTask, Status}
-import doobie.implicits._
+import org.typelevel.doobie.implicits._
 
 class DoobieMaintenanceService[F[_]](
     xa: Transactor[F],

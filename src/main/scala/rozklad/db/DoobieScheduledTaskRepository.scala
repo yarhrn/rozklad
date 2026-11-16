@@ -3,13 +3,13 @@ package rozklad.db
 import cats.data.NonEmptyList
 import cats.free.Free
 import cats.implicits._
-import doobie.{Fragments, Update0}
-import doobie.free.connection
-import doobie.postgres.implicits._
-import doobie.free.connection.ConnectionIO
-import doobie.implicits._
-import doobie.util.fragment.Fragment
-import doobie.util.fragments
+import org.typelevel.doobie.{Fragments, Update0}
+import org.typelevel.doobie.free.connection
+import org.typelevel.doobie.postgres.implicits._
+import org.typelevel.doobie.free.connection.ConnectionIO
+import org.typelevel.doobie.implicits._
+import org.typelevel.doobie.util.fragment.Fragment
+import org.typelevel.doobie.util.fragments
 import play.api.libs.json.JsValue
 import rozklad.api.{FailedReason, Id, ScheduledTask, Status}
 
@@ -21,12 +21,12 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
 
   implicit class Update0Rich(update: Update0) {
 
-    def returningScheduledTask: doobie.ConnectionIO[List[ScheduledTask]] = {
+    def returningScheduledTask: org.typelevel.doobie.ConnectionIO[List[ScheduledTask]] = {
       update.withGeneratedKeys[ScheduledTask](ScheduledTaskColumns*).compile.toList
     }
   }
 
-  def schedule(descriptor: ScheduledTask): doobie.ConnectionIO[Unit] =
+  def schedule(descriptor: ScheduledTask): org.typelevel.doobie.ConnectionIO[Unit] =
     (fr"""
         insert into""" ++ Fragment.const(table) ++
       fr"""(id, scheduled_at, trigger_at, status, updated_at, payload)
@@ -34,7 +34,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
         on conflict do nothing
       """).update.run.flatMap { result => if (result == 0) InsertDuplicate().raiseError[ConnectionIO, Unit] else ().pure[ConnectionIO] }
 
-  def acquireBatch(now: Instant, limit: Int): doobie.ConnectionIO[List[ScheduledTask]] = {
+  def acquireBatch(now: Instant, limit: Int): org.typelevel.doobie.ConnectionIO[List[ScheduledTask]] = {
     (fr"""
          with ready_to_acquire as (
              select id as ready_to_acquire_id
@@ -55,7 +55,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
        """).update.returningScheduledTask
   }
 
-  def delete(id: Id[ScheduledTask]): doobie.ConnectionIO[Option[ScheduledTask]] = {
+  def delete(id: Id[ScheduledTask]): org.typelevel.doobie.ConnectionIO[Option[ScheduledTask]] = {
     (fr"""
          delete from """ ++ Fragment.const(table) ++
       fr"""
@@ -63,12 +63,12 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
        """).update.returningScheduledTask.map(_.headOption)
   }
 
-  def select(id: Id[ScheduledTask]): doobie.ConnectionIO[Option[ScheduledTask]] = {
+  def select(id: Id[ScheduledTask]): org.typelevel.doobie.ConnectionIO[Option[ScheduledTask]] = {
     fr"select " ++ Fragment.const(ScheduledTaskColumns.mkString(",")) ++
       fr" from " ++ Fragment.const(table) ++ fr""" where id = $id"""
   }.query[ScheduledTask].option
 
-  def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
+  def done(id: Id[ScheduledTask], now: Instant, payload: Option[JsValue]): org.typelevel.doobie.ConnectionIO[List[ScheduledTask]] = {
     transition(
       id = id,
       now = now,
@@ -81,7 +81,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
     )
   }
 
-  def reschedule(now: Instant, descriptor: ScheduledTask): doobie.ConnectionIO[List[ScheduledTask]] = {
+  def reschedule(now: Instant, descriptor: ScheduledTask): org.typelevel.doobie.ConnectionIO[List[ScheduledTask]] = {
     transition(
       descriptor.id,
       now,
@@ -104,7 +104,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       id: Id[ScheduledTask],
       now: Instant,
       failedReason: Option[FailedReason],
-      updatedPayload: Option[JsValue]): doobie.ConnectionIO[List[ScheduledTask]] = {
+      updatedPayload: Option[JsValue]): org.typelevel.doobie.ConnectionIO[List[ScheduledTask]] = {
     transition(
       id = id,
       now = now,
@@ -125,7 +125,7 @@ class DoobieScheduledTaskRepository(table: String) extends ScheduledTaskReposito
       fromStatus: NonEmptyList[Status],
       toStatus: Status,
       triggerAt: Option[Instant],
-      scheduledAt: Option[Instant]): doobie.ConnectionIO[List[ScheduledTask]] = {
+      scheduledAt: Option[Instant]): org.typelevel.doobie.ConnectionIO[List[ScheduledTask]] = {
 
     val update = fr"""update """ ++ Fragment.const(table)
 

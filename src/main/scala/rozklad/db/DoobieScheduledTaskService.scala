@@ -4,8 +4,8 @@ import rozklad.api._
 
 import cats.effect.kernel.MonadCancel
 import cats.implicits._
-import doobie.implicits._
-import doobie.util.transactor.Transactor
+import org.typelevel.doobie.implicits._
+import org.typelevel.doobie.util.transactor.Transactor
 import play.api.libs.json.JsValue
 import rozklad.api.Event._
 
@@ -51,8 +51,8 @@ class DoobieScheduledTaskService[F[_]](
     scheduledTaskRepository.select(id).transact(xa)
   }
 
-  implicit class RichListOfTasks(fa: doobie.ConnectionIO[List[ScheduledTask]]) {
-    def validateAndGet(id: Id[ScheduledTask]): doobie.ConnectionIO[ScheduledTask] = {
+  implicit class RichListOfTasks(fa: org.typelevel.doobie.ConnectionIO[List[ScheduledTask]]) {
+    def validateAndGet(id: Id[ScheduledTask]): org.typelevel.doobie.ConnectionIO[ScheduledTask] = {
       fa.ensure(TaskIsNotInExpectedStatusException(id))(_.size == 1).map(_.head)
     }
   }
