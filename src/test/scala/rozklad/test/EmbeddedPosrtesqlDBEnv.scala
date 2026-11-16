@@ -2,12 +2,12 @@ package rozklad.test
 
 import cats.effect.IO
 import com.dimafeng.testcontainers.PostgreSQLContainer
-import doobie.Transactor
+import org.typelevel.doobie.Transactor
 import org.scalatest.{BeforeAndAfterAll, Suite}
 import org.testcontainers.utility.DockerImageName
 
 import java.sql.{Connection, DriverManager}
-import doobie.implicits._
+import org.typelevel.doobie.implicits._
 
 import scala.util.Try
 
@@ -54,7 +54,7 @@ trait EmbeddedPosrtesqlDBEnv extends BeforeAndAfterAll with Shortcuts {
       None
     )
 
-    dbs.foreach { db => doobie.Fragment.const(s"delete from $db").update.run.transact(inner).r }
+    dbs.foreach { db => org.typelevel.doobie.Fragment.const(s"delete from $db").update.run.transact(inner).r }
 
     inner
   }

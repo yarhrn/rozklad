@@ -2,7 +2,7 @@ package rozklad
 
 import api.{FailedReason, Id, Status}
 
-import doobie.util.meta.Meta
+import org.typelevel.doobie.util.meta.Meta
 import org.postgresql.util.PGobject
 import play.api.libs.json.{JsValue, Json}
 

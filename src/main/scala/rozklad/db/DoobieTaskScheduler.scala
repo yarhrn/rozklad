@@ -4,11 +4,11 @@ import rozklad.api.{Id, Observer, ReschedulingFailed, ScheduledTask, Status, Tas
 import cats.MonadError
 import cats.effect.Clock
 import cats.effect.kernel.MonadCancel
-import doobie.util.transactor.Transactor
+import org.typelevel.doobie.util.transactor.Transactor
 import play.api.libs.json.JsValue
-import doobie.implicits._
+import org.typelevel.doobie.implicits._
 import cats.implicits._
-import doobie.free.connection.ConnectionIO
+import org.typelevel.doobie.free.connection.ConnectionIO
 import rozklad.api.Event.{TaskRescheduled, TaskScheduled}
 import rozklad.api.Status.Created
 
